@@ -2,3 +2,8 @@ body {
     background-color: rgb(34, 34, 34);
     color: whitesmoke;
 }
+
+.startBtns {
+    width: 8px;
+    height: 30px;
+}
