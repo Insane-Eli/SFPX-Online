@@ -1,5 +1,6 @@
 :root {
     font-family: 'Handjet', sans-serif;
+    overflow-y: hidden;
 }
 
 body {
@@ -9,27 +10,41 @@ body {
     
 }
 
+
 .startBtn {
+	font-family: 'Handjet', sans-serif;
     background-color: #222222;
     color: whitesmoke;
     padding: 12px 24px; /* Spacious padding for a clean appearance */
-    font-size: 16px; /* Slightly larger text for readability */
-    border: #333333, solid, 1px;
+    font-size: 3vw; /* Slightly larger text for readability */
+    border: #333333 solid 1px; /* Fixed border syntax */
     border-radius: 4px; /* Slightly rounded corners for a modern touch */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: all 0.3s ease; /* Smooth hover transitions */
     cursor: pointer;
     margin: 2px;
+    position: relative; /* Ensure positioning for floating effect */
 }
 
 .startBtn:hover {
     background-color: #333333;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* More shadow on hover */
-    transform: translateY(-2px); /* Slight lift on hover */
+    animation: float 1s infinite; /* Start floating animation on hover */
 }
 
 .startBtn:active {
     background-color: #0f0f0f; /* Darker background on click */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Smaller shadow when clicked */
     transform: translateY(0); /* Reset lift */
+    animation: none; /* Stop animation when button is clicked */
+}
+
+/* Keyframes for floating animation */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0); /* Original position */
+    }
+    50% {
+        transform: translateY(-5px); /* Float upwards */
+    }
 }
