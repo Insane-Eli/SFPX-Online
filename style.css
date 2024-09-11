@@ -1,6 +1,4 @@
-
-.davin img {
-    width: 20px; /* Adjust the size of the icon */
-    height: 20px; /* Maintain aspect ratio */
-    vertical-align: middle; /* Align the icon with text */
+body {
+    background-color: rgb(34, 34, 34);
+    color: whitesmoke;
 }
