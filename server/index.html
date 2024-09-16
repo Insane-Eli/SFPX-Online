@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Websocket Tester</title>
+    <script src="backend.js"></script>
+</head>
+
+<body>
+    <h1>Search for Planet X</h1>
+    <!-- <label for="ip">Websocket Address:</label>
+    <input id="ip" oninput="updateIP();" /> -->
+
+    <form id="joinForm" onsubmit="backend.joinGame(pin.value, username.value); return false;">
+        <label for=" pin">Game Pin:</label>
+        <input id="pin" pattern="[0-9]{4}" required />
+        <label for="name">Player Name:</label>
+        <input id="name" pattern="[0-9a-zA-Z]{3,20}" required />
+        <input type="submit" id="join" />
+    </form>
+    <label for="create">Create Game:</label>
+    <button id="create"
+        onclick="backend.createGame().then((data) => {console.log(data); pin.value = JSON.parse(data).code;});">
+        Create
+    </button>
+    <br>
+    <button onclick='backend.send(`{"msg":"Hello World!"}`);'>Send Message</button>
+    <br>
+    <div id="output"></div>
+    <script>
+
+        // make user confirm page close
+        window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            backend.send('{"player":"' + username.value + '", "cmd":"leave"}');
+
+            // For IE and Firefox prior to version 4
+            if (e) {
+                e.returnValue = 'Sure?';
+            }
+
+            // For Safari
+            return 'Sure?';
+        };
+
+        const ip = document.getElementById("ip");
+        const pin = document.getElementById("pin");
+        const username = document.getElementById("name");
+        const output = document.getElementById("output");
+
+        var backend = new PlanetXBackend();
+        backend.onRecieve = (data) => {
+            // output.innerHTML += data + "<br>";
+            console.log(data);
+
+            try {
+                data = JSON.parse(data);
+
+                if (data.msg) {
+                    output.innerHTML += data.msg + "<br>";
+                }
+                if (data.error) {
+                    output.innerHTML += "<span style='color:red'>" + data.error + "</span><br>";
+                }
+            } catch (e) {}
+        };
+        backend.onDisconnect = () => {
+            console.log("Disconnected");
+            output.innerHTML += "Disconnected<br>";
+        };
+    </script>
+</body>
+
+</html>

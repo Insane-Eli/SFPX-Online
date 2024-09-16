@@ -1,21 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>The Search for Planet X</title>
-        <!-- Font: -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <div style="display: grid; justify-content: center;">
-            <h1 style="font-size: 6em"> The Search for Planet X </h1>
-            <button class="startBtn" onclick="location.href='createGame.html'"> New Game </button>
-            <button class="startBtn"> Join Game </button>
-            <button class="startBtn"> Options </button>
-            </a>
-        </div>
-    </body>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>The Search for Planet X</title>
+    <!-- favicon.ico not working for some reason, so used .png -->
+    <link rel="icon" type="image/x-icon" href="favicon.png"> 
+    <!-- Font: -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="server/backend.js"></script>
+</head>
+
+<body>
+    <div id="content" style="display: grid; justify-content: center; align-items: center;">
+        <!-- <h1 style="margin: 0.5em;"> The Search for Planet X </h1> -->
+        <img src="Logo.png" style="width: 50vw; padding: 0 10vw;" />
+        <!-- <button class="startBtn" onclick="location.href='createGame.html'"> New Game </button> -->
+        <!-- <button class="startBtn"> Join Game </button> -->
+
+        <form id="joinForm" style="width: 70vw;"
+            onsubmit="backend.joinGame(pin.value, username.value); gameJoined(pin.value); return false;">
+            <label for="pin" style="font-size: 2rem;">Game Pin:</label>
+            <input id="pin" class="startBtn" pattern="[0-9]{4}" required />
+            <br>
+            <label for="name" style="font-size: 2rem;">Player Name:</label>
+            <input id="name" class="startBtn" pattern="[0-9a-zA-Z]{3,20}" required />
+            <br>
+            <input type="submit" class="startBtn" id="join" value="Join Game" />
+        </form>
+
+        <br>
+
+        <button class="startBtn" style="width: 70vw;" id="create"
+            onclick="backend.createGame().then((data) => {gameCreated(data);});">
+            Create Game
+        </button>
+
+        <button class="startBtn" style="width: 70vw;"> Options </button>
+
+        </a>
+    </div>
+
+    <script>
+
+        // make user confirm page close
+        window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            backend.send('{"player":"' + username.value + '", "cmd":"leave"}');
+
+            // For IE and Firefox prior to version 4
+            if (e) {
+                e.returnValue = 'Sure?';
+            }
+
+            // For Safari
+            return 'Sure?';
+        };
+
+        // const ip = document.getElementById("ip");
+        const pin = document.getElementById("pin");
+        const username = document.getElementById("name");
+        const output = document.getElementById("output");
+
+        var backend = new PlanetXBackend();
+        backend.onRecieve = (data) => {
+            console.log(data);
+
+            try {
+                data = JSON.parse(data);
+
+                if (data.msg) {
+                    alert(data.msg);
+                }
+                if (data.error) {
+                    alert(data.error);
+
+                    if (data.error == "Username is taken" || data.error == "Game is full") {
+                        window.onbeforeunload = () => { };
+                        location.reload();
+                    }
+                }
+            } catch (e) { }
+        };
+        backend.onDisconnect = () => {
+            console.log("Disconnected");
+            output.innerHTML += "Disconnected<br>";
+        };
+
+        function gameCreated(data) {
+            console.log(data);
+            code = JSON.parse(data).code;
+            document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
+                                                            <h2>Share this with your friends to join!</h2>\n\
+                                                            <br>\n\
+                                                            <form id='joinForm' style='width: 70vw;'\n\
+                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value); gameJoined(" + code + "); return false;'>\n\
+                                                                <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
+                                                                <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{3,20}' required />\n\
+                                                                <br>\n\
+                                                                <input type='submit' class='startBtn' id='join' value='Join' />\n\
+                                                            </form>";
+        }
+
+        function gameJoined(code) {
+            document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>";
+            document.getElementById("content").innerHTML += "<h2>Share this with your friends to join!</h2>";
+        }
+    </script>
+</body>
+
 </html>

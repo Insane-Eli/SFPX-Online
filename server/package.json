@@ -1,0 +1,15 @@
+{
+    "type": "module",
+    "dependencies": {
+        "ws": "^8.12.0"
+    },
+    "name": "planet-x-webserver",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Garrett Jordan",
+    "license": "ISC",
+    "description": ""
+}
