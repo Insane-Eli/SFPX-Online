@@ -98,7 +98,7 @@ createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     res.setHeader('Access-Control-Allow-Headers', '*');
 
-    var gamecode = randomInt(4000, 5000);
+    var gamecode = randomInt(4001, 4999);
     var used = []
 
     Instances.forEach(element => {
@@ -106,7 +106,7 @@ createServer(function (req, res) {
     });
 
     while (used.includes(gamecode)) {
-        gamecode = randomInt(4000, 5000);
+        gamecode = randomInt(4001, 4999);
     }
 
     Instances.push(new GameInstance(gamecode));
