@@ -23,11 +23,11 @@
 
         <form id="joinForm" style="width: 70vw;"
             onsubmit="backend.joinGame(pin.value, username.value); gameJoined(pin.value); return false;">
-            <label for="pin" style="font-size: 2rem;">Game Pin:</label>
-            <input id="pin" class="startBtn" pattern="[0-9]{4}" required />
-            <br>
             <label for="name" style="font-size: 2rem;">Player Name:</label>
             <input id="name" class="startBtn" pattern="[0-9a-zA-Z]{3,20}" required />
+            <br>
+            <label for="pin" style="font-size: 2rem;">Game Pin:</label>
+            <input id="pin" class="startBtn" pattern="[0-9]{4}" required />
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
         </form>
