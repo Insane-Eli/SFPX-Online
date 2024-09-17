@@ -12,6 +12,10 @@ class GameInstance {
 
         this.wss = new WebSocketServer({ port: code });
 
+        this.clients = [];
+
+        var self = this;
+
         this.wss.on('connection', function connection(ws) {
             ws.on('message', function message(data) {
                 var msg = data.toString();
@@ -36,13 +40,17 @@ class GameInstance {
                                     ws.send(`{"error":"Game is full"}`);
                                     console.log("Rejecting player " + json.value + " because game is full");
                                     ws.terminate();
-                                } else if(nametaken) {
+                                } else if (nametaken) {
                                     ws.send(`{"error":"Username is taken"}`);
                                     console.log("Rejecting player " + json.value + " because username is taken");
                                     ws.terminate();
                                 } else {
                                     console.log("Adding Player " + json.value);
                                     game.addPlayer(json.value);
+                                    self.clients.push(ws);
+                                    // console.log('{"players":' + JSON.stringify(game.players) + '}');
+
+                                    self.broadcast(`{"players":` + JSON.stringify(game.players) + `}`);
                                 }
                                 break;
 
@@ -68,7 +76,15 @@ class GameInstance {
             ws.send(`{"msg":"Connected to Planet X Game Server ${code}}"`);
             console.log('Client Connected to Planet X Game Server ' + code);
         });
+
     }
+
+    broadcast(data) {
+        this.clients.forEach(client => {
+            client.send(data);
+        });
+    }
+
 }
 
 var Instances = [];

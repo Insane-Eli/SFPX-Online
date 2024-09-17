@@ -16,7 +16,7 @@ h1 {
 }
 
 h2 {
-    font-size: 4em;
+    font-size: 3em;
     margin: auto;
 }
 
@@ -79,5 +79,13 @@ input[type="submit"].startBtn:hover {
     50% {
         transform: translateY(-5px);
         /* Float upwards */
+    }
+}
+
+#playerList {
+    font-size: 2rem;
+
+    &.li {
+        margin: auto;
     }
 }

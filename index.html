@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>The Search for Planet X</title>
     <!-- favicon.ico not working for some reason, so used .png -->
-    <link rel="icon" type="image/x-icon" href="favicon.png"> 
+    <link rel="icon" type="image/x-icon" href="favicon.png">
     <!-- Font: -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +68,7 @@
 
         var backend = new PlanetXBackend();
         backend.onRecieve = (data) => {
-            console.log(data);
+            console.log("recieved:", data);
 
             try {
                 data = JSON.parse(data);
@@ -84,18 +84,31 @@
                         location.reload();
                     }
                 }
+                if (data.players) {
+                    console.log("Players");
+                    console.log(data.players);
+
+                    var playerList = document.getElementById("playerList");
+                    playerList.innerHTML = "";
+                    for (var i = 0; i < data.players.length; i++) {
+                        playerList.innerHTML += "<li>" + data.players[i].name + "</li>";
+                    }
+                }
             } catch (e) { }
         };
         backend.onDisconnect = () => {
             console.log("Disconnected");
-            output.innerHTML += "Disconnected<br>";
+
+            // alert("Disconnected");
+            window.onbeforeunload = () => { };
+            location.reload();
         };
 
         function gameCreated(data) {
             console.log(data);
             code = JSON.parse(data).code;
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
-                                                            <h2>Share this with your friends to join!</h2>\n\
+                                                            <h2>Share this with your friends to play together!</h2>\n\
                                                             <br>\n\
                                                             <form id='joinForm' style='width: 70vw;'\n\
                                                                 onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value); gameJoined(" + code + "); return false;'>\n\
@@ -107,8 +120,10 @@
         }
 
         function gameJoined(code) {
-            document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>";
-            document.getElementById("content").innerHTML += "<h2>Share this with your friends to join!</h2>";
+            document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
+                                                            <h2>Share this with your friends to join!</h2>\n\
+                                                            <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\
+                                                            <ul id='playerList'></ul>";
         }
     </script>
 </body>
