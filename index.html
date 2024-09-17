@@ -106,6 +106,8 @@
         function gameCreated(data) {
             console.log(data);
             code = JSON.parse(data).code;
+            
+            // Update HTML for New Game username input
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share this with your friends to play together!</h2>\n\
                                                             <br>\n\
@@ -119,6 +121,7 @@
         }
 
         function gameJoined(code) {
+            // Update HTML for Joined Game
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share this with your friends to join!</h2>\n\
                                                             <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\

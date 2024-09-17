@@ -8,7 +8,6 @@ class GameInstance {
         this.code = code;
 
         var game = this.game = new PlanetXGame(code);
-        // this.game = game;
 
         this.wss = new WebSocketServer({ port: code });
 
@@ -48,7 +47,6 @@ class GameInstance {
                                     console.log("Adding Player " + json.value);
                                     game.addPlayer(json.value);
                                     self.clients.push(ws);
-                                    // console.log('{"players":' + JSON.stringify(game.players) + '}');
 
                                     self.broadcast(`{"players":` + JSON.stringify(game.players) + `}`);
                                 }
