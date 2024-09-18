@@ -47,7 +47,8 @@
     
 	<div class="overlay" id="overlay"></div>
 	
-    <div class="options-tab" id="optionsTab">
+    <div class="options-tab" id="optionsTab"> <!-- options tab doesnt do anythign rn -->
+	    
 	    <button class="closeBtn" onclick="closeOptions()"> X </button>
         <h3>Brightness</h3>
         <div class="slider-container">
@@ -58,7 +59,7 @@
 
 
     <script>
-		function toggleOptions() {
+		function toggleOptions() { 
 			const optionsTab = document.getElementById('optionsTab');
 			const overlay = document.getElementById('overlay');
 			
@@ -68,7 +69,7 @@
 			// Toggle the active class for the overlay (dimming background)
 			overlay.classList.toggle('active');
 		}
-		
+			
 		function closeOptions() {
 			const optionsTab = document.getElementById('optionsTab');
 			const overlay = document.getElementById('overlay');
@@ -77,6 +78,7 @@
 			optionsTab.classList.remove('open');
 			overlay.classList.remove('active');
 		}
+
 
         function adjustBrightness(value) {
             const brightnessValue = value / 100;
