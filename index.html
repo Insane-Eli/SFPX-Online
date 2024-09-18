@@ -30,7 +30,7 @@
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
             <br>
-	        
+			<input type="range" step="50">
         </form>
 
         <br>
@@ -44,8 +44,28 @@
 
         </a>
     </div>
+    <button class="options-btn" onclick="toggleOptions()">Options</button>
+
+    <div class="options-tab" id="optionsTab">
+        <h3>Brightness</h3>
+        <div class="slider-container">
+            <label for="brightness">Adjust Brightness:</label>
+            <input type="range" id="brightness" min="0" max="100" value="100" oninput="adjustBrightness(this.value)">
+        </div>
+    </div>
+
 
     <script>
+	    //i hope this works if you see this then it didnt :(
+	    function toggleOptions() {
+            const optionsTab = document.getElementById('optionsTab');
+            optionsTab.classList.toggle('open');
+        }
+
+        function adjustBrightness(value) {
+            const brightnessValue = value / 100;
+            document.body.style.backgroundColor = `rgba(255, 255, 255, ${brightnessValue})`;
+        }
 
         // make user confirm page close
         window.onbeforeunload = function (e) {
