@@ -30,7 +30,7 @@
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
             <br>
-			<input type="range" step="50">
+			<input type="range" class="startBtn" step="50">
         </form>
 
         <br>
@@ -40,11 +40,10 @@
             Create Game
         </button>
 
-        <button class="startBtn" style="width: 70vw;"> Options </button>
+        <button class="startBtn" style="width: 70vw;" onclick="toggleOptions()"> Options </button>
 
         </a>
     </div>
-    <button class="options-btn" onclick="toggleOptions()">Options</button>
 
     <div class="options-tab" id="optionsTab">
         <h3>Brightness</h3>
@@ -56,7 +55,6 @@
 
 
     <script>
-	    //i hope this works if you see this then it didnt :(
 	    function toggleOptions() {
             const optionsTab = document.getElementById('optionsTab');
             optionsTab.classList.toggle('open');
@@ -153,3 +151,4 @@
 </body>
 
 </html>
+
