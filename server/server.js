@@ -9,7 +9,7 @@ import serveStatic from 'serve-static';
 class GameInstance {
     constructor(code) {
         this.code = code;
-        
+
         var printPrefix = "Game " + code + ": ";
 
         this.game = new PlanetXGame(code);
@@ -110,12 +110,12 @@ console.log("\
 
 console.log("Starting Webpage");
 
-connect()
-    .use(serveStatic('../'))
-    .listen(8080, () => console.log('Webpage Started on Port 8080'));
+const s = connect();
+s.use(serveStatic('../'))
+s.listen(8080, () => { /*console.log('Webpage Started on Port 8080')*/ });
 
 //create a server object:
-createServer(function (req, res) {
+const http = createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
@@ -140,5 +140,6 @@ createServer(function (req, res) {
 
     res.end(); //end the response
 }).listen(4000); //the server object listens on port 8080
+console.log("Webpage Started at http://" + (http.address().address == "::" ? "localhost" : http.address().address) + ":" + 8080);
 
 console.log("Waiting for game to be created...");
