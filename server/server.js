@@ -3,11 +3,16 @@ import { createServer } from "http";
 import PlanetXGame from './game.js';
 import { randomInt } from 'crypto';
 
+import connect from 'connect';
+import serveStatic from 'serve-static';
+
 class GameInstance {
     constructor(code) {
         this.code = code;
+        
+        var printPrefix = "Game " + code + ": ";
 
-        var game = this.game = new PlanetXGame(code);
+        this.game = new PlanetXGame(code);
 
         this.wss = new WebSocketServer({ port: code });
 
@@ -18,7 +23,7 @@ class GameInstance {
         this.wss.on('connection', function connection(ws) {
             ws.on('message', function message(data) {
                 var msg = data.toString();
-                console.log('received:', msg);
+                console.log(printPrefix + 'received:', msg);
                 ws.send("echo: " + msg);
 
                 try {
@@ -29,35 +34,35 @@ class GameInstance {
 
                                 var nametaken = false;
 
-                                game.players.forEach(player => {
+                                self.game.players.forEach(player => {
                                     if (player.name == json.value) {
                                         nametaken = true;
                                     }
                                 });
 
-                                if (game.players.length >= 4) {
+                                if (self.game.players.length >= 4) {
                                     ws.send(`{"error":"Game is full"}`);
-                                    console.log("Rejecting player " + json.value + " because game is full");
+                                    console.log(printPrefix + "Rejecting player " + json.value + " because game is full");
                                     ws.terminate();
                                 } else if (nametaken) {
                                     ws.send(`{"error":"Username is taken"}`);
-                                    console.log("Rejecting player " + json.value + " because username is taken");
+                                    console.log(printPrefix + "Rejecting player " + json.value + " because username is taken");
                                     ws.terminate();
                                 } else {
-                                    console.log("Adding Player " + json.value);
-                                    game.addPlayer(json.value);
+                                    console.log(printPrefix + "Adding Player " + json.value);
+                                    self.game.addPlayer(json.value);
                                     self.clients.push(ws);
 
-                                    self.broadcast(`{"players":` + JSON.stringify(game.players) + `}`);
+                                    self.broadcast(`{"players":` + JSON.stringify(self.game.players) + `}`);
                                 }
                                 break;
 
                             case 'leave':
-                                console.log("Removing Player " + json.player);
-                                game.removePlayer(json.player);
+                                console.log(printPrefix + "Removing Player " + json.player);
+                                self.game.removePlayer(json.player);
 
                                 console.log('Client ' + json.player + ' Disconnected from Planet X Game Server ' + code);
-                                if (game.players.length == 0) {
+                                if (self.game.players.length == 0) {
                                     console.log("Deleting Game " + code + " because no players are connected");
                                     Instances.splice(Instances.indexOf(this), 1);
                                 }
@@ -87,7 +92,27 @@ class GameInstance {
 
 var Instances = [];
 
-console.log("Waiting for game to be created...");
+console.log("\
+     _____ _            _____                     _      ______          \n\
+    |_   _| |          /  ___|                   | |     |  ___|        \n\
+      | | | |__   ___  \\ `--.  ___  __ _ _ __ ___| |__   | |_ ___  _ __ \n\
+      | | | '_ \\ / _ \\  `--. \\/ _ \\/ _` | '__/ __| '_ \\  |  _/ _ \\| '__|\n\
+      | | | | | |  __/ /\\__/ /  __/ (_| | | | (__| | | | | || (_) | |   \n\
+      \\_/ |_| |_|\\___| \\____/ \\___|\\__,_|_|  \\___|_| |_| \\_| \\___/|_|   \n\
+    ");
+console.log("\
+  ______   __         ______     __   __     ______     ______      __  __    \n\
+ /\\  == \\ /\\ \\       /\\  __ \\   /\\ \"-.\\ \\   /\\  ___\\   /\\__  _\\    /\\_\\_\\_\\   \n\
+ \\ \\  _-/ \\ \\ \\____  \\ \\  __ \\  \\ \\ \\-.  \\  \\ \\  __\\   \\/_/\\ \\/    \\/_/\\_\\/_  \n\
+  \\ \\_\\    \\ \\_____\\  \\ \\_\\ \\_\\  \\ \\_\\\\\"\\_\\  \\ \\_____\\    \\ \\_\\      /\\_\\/\\_\\ \n\
+   \\/_/     \\/_____/   \\/_/\\/_/   \\/_/ \\/_/   \\/_____/     \\/_/      \\/_/\\/_/ \n\
+    ");
+
+console.log("Starting Webpage");
+
+connect()
+    .use(serveStatic('../'))
+    .listen(8080, () => console.log('Webpage Started on Port 8080'));
 
 //create a server object:
 createServer(function (req, res) {
@@ -115,3 +140,5 @@ createServer(function (req, res) {
 
     res.end(); //end the response
 }).listen(4000); //the server object listens on port 8080
+
+console.log("Waiting for game to be created...");
