@@ -68,19 +68,19 @@ input[type="submit"].startBtn:hover {
     /* Stop animation when button is clicked */
 }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    color: whitesmoke;
-    font-size: 20px;
-    cursor: pointer;
-    transition: color 0.3s ease;
+.closeBtn {
+    position: absolute; /* Positioning relative to the nearest positioned ancestor */
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    background-color: transparent; /* Transparent background */
+    border: none; /* No border */
+    color: whitesmoke; /* Text color */
+    font-size: 20px; /* Font size */
+    cursor: pointer; /* Pointer on hover */
+    transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.close-btn:hover {
+.closeBtn:hover {
     color: lightgray;
 }
 

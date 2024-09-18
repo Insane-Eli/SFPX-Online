@@ -31,7 +31,7 @@
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
             <br>
-            <input type="range" class="startBtn" step="50">
+			<input type="range" class="startBtn" min="0" max="2">
         </form>
 
         <br>
@@ -59,29 +59,18 @@
         </div>
 
     </div>
-    
+
 
     <script>
-        function toggleOptions() {
+	    function toggleOptions() {
             const optionsTab = document.getElementById('optionsTab');
-            const overlay = document.getElementById('overlay');
-
-            // Toggle the open class for the tab
             optionsTab.classList.toggle('open');
-
-            // Toggle the active class for the overlay (dimming background)
-            overlay.classList.toggle('active');
         }
-
-        function closeOptions() {
-            const optionsTab = document.getElementById('optionsTab');
-            const overlay = document.getElementById('overlay');
-
-            // Close the tab and remove the overlay
-            optionsTab.classList.remove('open');
-            overlay.classList.remove('active');
-        }
-
+        
+		function closeOptions() {
+			const optionsTab = document.getElementById('optionsTab');
+			optionsTab.classList.remove('open');
+		}
 
         function adjustBrightness(value) {
             const brightnessValue = value / 100;
