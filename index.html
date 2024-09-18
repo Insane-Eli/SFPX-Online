@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>The Search for Planet X</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.png"> <!-- favicon.ico not working for some reason, so used .png -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.png">
+    <!-- favicon.ico not working for some reason, so used .png -->
     <!-- Font: -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +22,7 @@
         <!-- <button class="startBtn"> Join Game </button> -->
 
         <form id="joinForm" style="width: 70vw;"
-            onsubmit="backend.joinGame(pin.value, username.value); gameJoined(pin.value); return false;">
+            onsubmit="backend.joinGame(pin.value, username.value); gameJoined(pin.value, username.value); return false;">
             <label for="name" style="font-size: 2rem;">Player Name:</label>
             <input id="name" class="startBtn" pattern="[0-9a-zA-Z]{3,20}" required />
             <br>
@@ -30,7 +31,7 @@
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
             <br>
-			<input type="range" class="startBtn" step="50">
+            <input type="range" class="startBtn" step="50">
         </form>
 
         <br>
@@ -43,41 +44,43 @@
         <button class="startBtn" style="width: 70vw;" onclick="toggleOptions()"> Options </button>
 
         </a>
+
+        <div class="overlay" id="overlay"></div>
+
+        <div class="options-tab" id="optionsTab"> <!-- options tab doesnt do anythign rn -->
+
+            <button class="closeBtn" onclick="closeOptions()"> X </button>
+            <h3>Brightness</h3>
+            <div class="slider-container">
+                <label for="brightness">Adjust Brightness:</label>
+                <input type="range" id="brightness" min="0" max="100" value="100"
+                    oninput="adjustBrightness(this.value)">
+            </div>
+        </div>
+
     </div>
     
-	<div class="overlay" id="overlay"></div>
-	
-    <div class="options-tab" id="optionsTab"> <!-- options tab doesnt do anythign rn -->
-	    
-	    <button class="closeBtn" onclick="closeOptions()"> X </button>
-        <h3>Brightness</h3>
-        <div class="slider-container">
-            <label for="brightness">Adjust Brightness:</label>
-            <input type="range" id="brightness" min="0" max="100" value="100" oninput="adjustBrightness(this.value)">
-        </div>
-    </div>
-
 
     <script>
-		function toggleOptions() { 
-			const optionsTab = document.getElementById('optionsTab');
-			const overlay = document.getElementById('overlay');
-			
-			// Toggle the open class for the tab
-			optionsTab.classList.toggle('open');
-			
-			// Toggle the active class for the overlay (dimming background)
-			overlay.classList.toggle('active');
-		}
-			
-		function closeOptions() {
-			const optionsTab = document.getElementById('optionsTab');
-			const overlay = document.getElementById('overlay');
-			
-			// Close the tab and remove the overlay
-			optionsTab.classList.remove('open');
-			overlay.classList.remove('active');
-		}
+        function toggleOptions() {
+            const optionsTab = document.getElementById('optionsTab');
+            const overlay = document.getElementById('overlay');
+
+            // Toggle the open class for the tab
+            optionsTab.classList.toggle('open');
+
+            // Toggle the active class for the overlay (dimming background)
+            overlay.classList.toggle('active');
+        }
+
+        function closeOptions() {
+            const optionsTab = document.getElementById('optionsTab');
+            const overlay = document.getElementById('overlay');
+
+            // Close the tab and remove the overlay
+            optionsTab.classList.remove('open');
+            overlay.classList.remove('active');
+        }
 
 
         function adjustBrightness(value) {
@@ -146,13 +149,13 @@
         function gameCreated(data) {
             console.log(data);
             code = JSON.parse(data).code;
-            
+
             // Update HTML for New Game username input
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share this with your friends to play together!</h2>\n\
                                                             <br>\n\
                                                             <form id='joinForm' style='width: 70vw;'\n\
-                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value); gameJoined(" + code + "); return false;'>\n\
+                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value); gameJoined(" + code + ", document.getElementById(\"name\").value); return false;'>\n\
                                                                 <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
                                                                 <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{3,20}' required />\n\
                                                                 <br>\n\
@@ -160,10 +163,13 @@
                                                             </form>";
         }
 
-        function gameJoined(code) {
+        function gameJoined(code, name) {
             // Update HTML for Joined Game
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share this with your friends to join!</h2>\n\
+                                                            <label for='ready' style='font-size: 2rem;'>I'm Ready\n\
+                                                                <input id='ready' type='checkbox' style='display: inline-block; width: 1.2rem; height: 1.2rem; margin: auto; margin-left: 0.5rem;' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"ready\":' + this.checked + '}`);'/>\n\
+                                                            </label>\n\
                                                             <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\
                                                             <ul id='playerList'></ul>";
         }
@@ -171,4 +177,3 @@
 </body>
 
 </html>
-
