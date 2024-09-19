@@ -112,10 +112,11 @@ input[type="submit"].startBtn:hover {
     opacity: 0;
     /* Hidden by default */
     display: none;
+    border-radius: 4px;
 }
 
 .options-tab.open {
-    opacity: 1;
+    opacity: 0.9;
     display: block;
     /* Make it visible when open */
 }
@@ -220,7 +221,7 @@ input[type="submit"].startBtn:hover {
     color: #fff;
     cursor: pointer;
     text-align: center;
-    width: 31.54%;
+    width: 48.2%;
     border-radius: 3px;
 }
 
