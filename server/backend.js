@@ -25,9 +25,9 @@ class PlanetXBackend {
         }
     }
 
-    async createGame() {
+    async createGame(difficulty) {
         var code = 0;
-        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors' }).then(data => {
+        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: difficulty }).then(data => {
             code = data.text();
         });
         return code;

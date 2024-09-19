@@ -7,8 +7,9 @@ import connect from 'connect';
 import serveStatic from 'serve-static';
 
 class GameInstance {
-    constructor(code) {
+    constructor(code, difficulty) {
         this.code = code;
+        this.difficulty = difficulty;
 
         var printPrefix = "Game " + code + ": ";
 
@@ -20,7 +21,7 @@ class GameInstance {
 
         var self = this;
 
-        console.log(printPrefix + "Started");
+        console.log(printPrefix + "Started with difficulty " + difficulty);
 
         this.wss.on('connection', function connection(ws) {
             ws.on('message', function message(data) {
@@ -129,24 +130,37 @@ createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     res.setHeader('Access-Control-Allow-Headers', '*');
 
-    var gamecode = randomInt(4001, 4999);
-    var used = []
-
-    Instances.forEach(element => {
-        used.push(element.code);
-    });
-
-    while (used.includes(gamecode)) {
-        gamecode = randomInt(4001, 4999);
-    }
-
-    Instances.push(new GameInstance(gamecode));
-
-    res.write('{"code":' + gamecode + '}'); //write a response to the client
     // console.log("Created new Game on port " + gamecode);
 
+    let body = "";
+    req.on('data', (chunk) => {
+        body += chunk;
+    });
+    req.on('end', () => {
+        // console.log("HTTP Recieved: " + body);
 
-    res.end(); //end the response
+        var difficulty = body;
+
+        if (difficulty) {
+            var gamecode = randomInt(4001, 4999);
+            var used = []
+
+            Instances.forEach(element => {
+                used.push(element.code);
+            });
+
+            while (used.includes(gamecode)) {
+                gamecode = randomInt(4001, 4999);
+            }
+
+            Instances.push(new GameInstance(gamecode, difficulty));
+
+            res.write('{"code":' + gamecode + '}'); //write a response to the client
+        }
+
+        res.end(); //end the response
+    });
+
 }).listen(4000); //the server object listens on port 4000
 // console.log("Webpage Started at http://" + (http.address().address == "::" ? "localhost" : http.address().address) + ":" + 8080);
 // console.log("Webpage Started at http://planetx.local");

@@ -1,6 +1,7 @@
 :root {
     font-family: 'Handjet', sans-serif;
     overflow-y: hidden;
+    --accent-color: rgb(80, 183, 249);
 }
 
 body {
@@ -69,15 +70,24 @@ input[type="submit"].startBtn:hover {
 }
 
 .closeBtn {
-    position: absolute; /* Positioning relative to the nearest positioned ancestor */
-    top: 10px; /* Distance from the top */
-    right: 10px; /* Distance from the right */
-    background-color: transparent; /* Transparent background */
-    border: none; /* No border */
-    color: whitesmoke; /* Text color */
-    font-size: 20px; /* Font size */
-    cursor: pointer; /* Pointer on hover */
-    transition: color 0.3s ease; /* Smooth color transition */
+    position: absolute;
+    /* Positioning relative to the nearest positioned ancestor */
+    top: 10px;
+    /* Distance from the top */
+    right: 10px;
+    /* Distance from the right */
+    background-color: transparent;
+    /* Transparent background */
+    border: none;
+    /* No border */
+    color: whitesmoke;
+    /* Text color */
+    font-size: 20px;
+    /* Font size */
+    cursor: pointer;
+    /* Pointer on hover */
+    transition: color 0.3s ease;
+    /* Smooth color transition */
 }
 
 .closeBtn:hover {
@@ -170,4 +180,50 @@ input[type="submit"].startBtn:hover {
     &.li {
         margin: auto;
     }
+}
+
+/* .switch-toggle {
+    float: left;
+    background: #242729;
+} */
+.switch-toggle {
+    font-family: 'Handjet', sans-serif;
+    background-color: #222222;
+    color: whitesmoke;
+    /* padding: 12px 24px; */
+    /* Spacious padding for a clean appearance */
+    font-size: 3vw;
+    /* Slightly larger text for readability */
+    border: #333333 solid 1px;
+    /* Fixed border syntax */
+    border-radius: 4px;
+    /* Slightly rounded corners for a modern touch */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow for depth */
+    transition: all 0.3s ease;
+    /* Smooth hover transitions */
+    cursor: pointer;
+    margin: 2px;
+    position: relative;
+    /* Ensure positioning for floating effect */
+    width: 70vw;
+}
+
+.switch-toggle input {
+    position: absolute;
+    opacity: 0;
+}
+
+.switch-toggle input+label {
+    padding: 7px;
+    float: left;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    width: 31.54%;
+    border-radius: 3px;
+}
+
+.switch-toggle input:checked+label {
+    background-color: var(--accent-color);
 }
