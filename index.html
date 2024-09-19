@@ -22,16 +22,16 @@
         <!-- <button class="startBtn"> Join Game </button> -->
 
         <form id="joinForm" style="width: 70vw;"
-            onsubmit="backend.joinGame(pin.value, username.value); gameJoined(pin.value, username.value); return false;">
-            <label for="name" style="font-size: 2rem;">Player Name:</label>
+            onsubmit="gameJoining(pin.value); return false;">
+            <!-- <label for="name" style="font-size: 2rem;">Player Name:</label>
             <input id="name" class="startBtn" pattern="[0-9a-zA-Z]{3,20}" required />
-            <br>
+            <br> -->
             <label for="pin" style="font-size: 2rem;">Game Pin:</label>
             <input id="pin" class="startBtn" pattern="[0-9]{4}" required />
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
             <br>
-			<input type="range" class="startBtn" min="0" max="2">
+            <input type="range" class="startBtn" min="0" max="2">
         </form>
 
         <br>
@@ -62,15 +62,15 @@
 
 
     <script>
-	    function toggleOptions() {
+        function toggleOptions() {
             const optionsTab = document.getElementById('optionsTab');
             optionsTab.classList.toggle('open');
         }
-        
-		function closeOptions() {
-			const optionsTab = document.getElementById('optionsTab');
-			optionsTab.classList.remove('open');
-		}
+
+        function closeOptions() {
+            const optionsTab = document.getElementById('optionsTab');
+            optionsTab.classList.remove('open');
+        }
 
         function adjustBrightness(value) {
             const brightnessValue = value / 100;
@@ -111,8 +111,8 @@
                     alert(data.error);
 
                     if (data.error == "Username is taken" || data.error == "Game is full") {
-                        window.onbeforeunload = () => { };
-                        location.reload();
+                        // window.onbeforeunload = () => { };
+                        // location.reload();
                     }
                 }
                 if (data.players) {
@@ -122,7 +122,7 @@
                     var playerList = document.getElementById("playerList");
                     playerList.innerHTML = "";
                     for (var i = 0; i < data.players.length; i++) {
-                        playerList.innerHTML += "<li>" + data.players[i].name + "</li>";
+                        playerList.innerHTML += "<li>" + data.players[i].name + "&nbsp;" + (data.players[i].ready ? "&#10004;" : "&#10006;") + "</li>";
                     }
                 }
             } catch (e) { }
@@ -130,14 +130,18 @@
         backend.onDisconnect = () => {
             console.log("Disconnected");
 
-            // alert("Disconnected");
-            window.onbeforeunload = () => { };
-            location.reload();
+            alert("Disconnected");
+            // window.onbeforeunload = () => { };
+            // location.reload();
         };
 
         function gameCreated(data) {
             console.log(data);
             code = JSON.parse(data).code;
+            gameJoining(code);
+        }
+
+        function gameJoining(code) {
 
             // Update HTML for New Game username input
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
@@ -157,7 +161,7 @@
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share this with your friends to join!</h2>\n\
                                                             <label for='ready' style='font-size: 2rem;'>I'm Ready\n\
-                                                                <input id='ready' type='checkbox' style='display: inline-block; width: 1.2rem; height: 1.2rem; margin: auto; margin-left: 0.5rem;' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"ready\":' + this.checked + '}`);'/>\n\
+                                                                <input id='ready' type='checkbox' style='display: inline-block; width: 1.2rem; height: 1.2rem; margin: auto; margin-left: 0.5rem;' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":${this.checked}}`);'/>\n\
                                                             </label>\n\
                                                             <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\
                                                             <ul id='playerList'></ul>";

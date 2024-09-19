@@ -13,10 +13,19 @@ export default class PlanetXGame {
         this.players.splice(this.players.indexOf(name), 1);
     }
 
+    getPlayer(name) {
+        for (var i = 0; i < this.players.length; i++) {
+            if (this.players[i].name == name) {
+                return this.players[i];
+            }
+        }
+    }
+
 }
 
 class Player {
     constructor(name) {
         this.name = name;
+        this.ready = false;
     }
 }

@@ -20,6 +20,8 @@ class GameInstance {
 
         var self = this;
 
+        console.log(printPrefix + "Started");
+
         this.wss.on('connection', function connection(ws) {
             ws.on('message', function message(data) {
                 var msg = data.toString();
@@ -68,6 +70,12 @@ class GameInstance {
                                 }
 
                                 break;
+
+                            case 'ready':
+                                self.game.getPlayer(json.player).ready = json.value;
+                                console.log(printPrefix + "Setting Player " + json.player + " ready to " + json.value);
+                                self.broadcast(`{"players":` + JSON.stringify(self.game.players) + `}`);
+                                break;
                         }
                     }
                 } catch (e) {
@@ -110,12 +118,12 @@ console.log("\
 
 console.log("Starting Webpage");
 
-const s = connect();
-s.use(serveStatic('../'))
-s.listen(8080, () => { /*console.log('Webpage Started on Port 8080')*/ });
+connect()
+    .use(serveStatic('../'))
+    .listen(80, () => { /*console.log('Webpage Started on Port 8080')*/ });
 
 //create a server object:
-const http = createServer(function (req, res) {
+createServer(function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Request-Method', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
@@ -135,11 +143,12 @@ const http = createServer(function (req, res) {
     Instances.push(new GameInstance(gamecode));
 
     res.write('{"code":' + gamecode + '}'); //write a response to the client
-    console.log("Created new Game on port " + gamecode);
+    // console.log("Created new Game on port " + gamecode);
 
 
     res.end(); //end the response
-}).listen(4000); //the server object listens on port 8080
-console.log("Webpage Started at http://" + (http.address().address == "::" ? "localhost" : http.address().address) + ":" + 8080);
+}).listen(4000); //the server object listens on port 4000
+// console.log("Webpage Started at http://" + (http.address().address == "::" ? "localhost" : http.address().address) + ":" + 8080);
+// console.log("Webpage Started at http://planetx.local");
 
 console.log("Waiting for game to be created...");
