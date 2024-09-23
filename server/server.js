@@ -5,6 +5,7 @@ import { randomInt } from 'crypto';
 
 import connect from 'connect';
 import serveStatic from 'serve-static';
+import { Console } from 'console';
 
 class GameInstance {
     constructor(code, difficulty) {
@@ -139,23 +140,37 @@ createServer(function (req, res) {
     req.on('end', () => {
         // console.log("HTTP Recieved: " + body);
 
-        var difficulty = body;
+        if (body < 10) {
 
-        if (difficulty) {
-            var gamecode = randomInt(4001, 4999);
+            var difficulty = body;
+
+            if (difficulty) {
+                var gamecode = randomInt(4001, 4999);
+                var used = []
+
+                Instances.forEach(element => {
+                    used.push(element.code);
+                });
+
+                while (used.includes(gamecode)) {
+                    gamecode = randomInt(4001, 4999);
+                }
+
+                Instances.push(new GameInstance(gamecode, difficulty));
+
+                res.write('{"code":' + gamecode + '}'); //write a response to the client
+            }
+        } else {
             var used = []
 
             Instances.forEach(element => {
                 used.push(element.code);
             });
+            var exists = used.includes(body);
 
-            while (used.includes(gamecode)) {
-                gamecode = randomInt(4001, 4999);
-            }
+            console.log("Game " + body + " Exists: " + exists);
 
-            Instances.push(new GameInstance(gamecode, difficulty));
-
-            res.write('{"code":' + gamecode + '}'); //write a response to the client
+            res.write("{\"exists\":" + exists + "}");
         }
 
         res.end(); //end the response

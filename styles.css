@@ -175,11 +175,26 @@ input[type="submit"].startBtn:hover {
     }
 }
 
-#playerList {
-    font-size: 2rem;
+#playerList>li {
+    margin: 1vw;
+    display: block;
+    width: 70vw;
+    height: auto;
 
-    &.li {
-        margin: auto;
+    background-color: #222222;
+    color: whitesmoke;
+    padding: 12px 12px;
+    /* Spacious padding for a clean appearance */
+    font-size: 3vw;
+    /* Slightly larger text for readability */
+    border: #333333 solid 1px;
+    border-radius: 4px;
+
+    &>img {
+        height: 1.1em;
+        margin-right: 0.5em;
+        vertical-align: middle;
+        display: inline-block;
     }
 }
 
@@ -227,4 +242,45 @@ input[type="submit"].startBtn:hover {
 
 .switch-toggle input:checked+label {
     background-color: var(--accent-color);
+}
+
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    /* Remove most all native input styles */
+    appearance: none;
+    /* Not removed via appearance */
+    margin: 0;
+
+    background-color: #222222;
+    /* Slightly larger text for readability */
+    border: #333333 solid 1px;
+    /* Fixed border syntax */
+    border-radius: 4px;
+
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    transform: translateY(-0.075em);
+
+    display: grid;
+    place-content: center;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--accent-color);
+    /* Windows High Contrast Mode */
+    background-color: CanvasText;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
 }

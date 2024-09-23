@@ -37,4 +37,13 @@ class PlanetXBackend {
         this.ws.send(data);
     }
 
+    async gameExists(code) {
+        var exists = false;
+        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: code }).then(async data => {
+            var data = await data.text();
+            exists = JSON.parse(data).exists;
+        });
+        return exists;
+    }
+
 }

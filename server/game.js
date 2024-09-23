@@ -3,10 +3,12 @@ export default class PlanetXGame {
     constructor(code) {
         this.code = code;
         this.players = [];
+        this.seasons = ["winter", "spring", "summer", "autumn"];
     }
 
     addPlayer(name) {
-        this.players.push(new Player(name));
+        var season = this.seasons[this.players.length];
+        this.players.push(new Player(name, season));
     }
 
     removePlayer(name) {
@@ -24,8 +26,9 @@ export default class PlanetXGame {
 }
 
 class Player {
-    constructor(name) {
+    constructor(name, season) {
         this.name = name;
         this.ready = false;
+        this.season = season;
     }
 }

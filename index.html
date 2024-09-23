@@ -42,13 +42,13 @@
 
         <!-- Game Difficulty -->
         <div class="switch-toggle switch-3 switch-candy">
-            
+
             <input id="standard" name="state-d" type="radio" checked="" />
             <label for="standard" onclick="">Standard (12 Sectors)</label>
 
             <input id="expert" name="state-d" type="radio" checked="checked" />
             <label for="expert" class="disabled" onclick="">Expert (18 Sectors)</label>
-            
+
         </div>
 
         <button class="startBtn" style="width: 70vw;" onclick="toggleOptions()"> Options </button>
@@ -87,19 +87,7 @@
         }
 
         document.getElementById("standard").click();
-
         function getDifficulty() {
-            // if (document.getElementById("easy").checked) {
-            //     // return "easy";
-            //     return 1;
-            // } else if (document.getElementById("medium").checked) {
-            //     // return "medium";
-            //     return 2;
-            // } else if (document.getElementById("hard").checked) {
-            //     // return "hard";
-            //     return 3;
-            // }
-
             if (document.getElementById("standard").checked) {
                 return 1;
             } else if (document.getElementById("expert").checked) {
@@ -152,7 +140,8 @@
                     var playerList = document.getElementById("playerList");
                     playerList.innerHTML = "";
                     for (var i = 0; i < data.players.length; i++) {
-                        playerList.innerHTML += "<li>" + data.players[i].name + "&nbsp;" + (data.players[i].ready ? "&#10004;" : "&#10006;") + "</li>";
+                        // playerList.innerHTML += "<li>" + data.players[i].name + "&nbsp;" + (data.players[i].ready ? "&#10004;" : "&#10006;") + "</li>";
+                        playerList.innerHTML += "<li><img src='./images/seasons/" + data.players[i].season + ".png' />" + data.players[i].name + "<span style='float: right;'>Ready</span><span style='float: right; background-color: " + (data.players[i].ready ? "lime" : "red") + "; box-shadow: 0 0 6px " + (data.players[i].ready ? "lime" : "red") + "; width: 15px; height: 15px; margin: 12px; border-radius: 50%; display: inline-block;'></span></li>";
                     }
                 }
             } catch (e) { }
@@ -168,10 +157,20 @@
         function gameCreated(data) {
             console.log(data);
             code = JSON.parse(data).code;
-            gameJoining(code);
+            gameJoining(code, true);
         }
 
-        function gameJoining(code) {
+        async function gameJoining(code, force = false) {
+
+            if (!force) {
+
+                var exists = await backend.gameExists(code);
+
+                if (!exists) {
+                    alert("Game does not exist");
+                    return;
+                }
+            }
 
             // Update HTML for New Game username input
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
@@ -180,7 +179,7 @@
                                                             <form id='joinForm' style='width: 70vw;'\n\
                                                                 onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value); gameJoined(" + code + ", document.getElementById(\"name\").value); return false;'>\n\
                                                                 <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
-                                                                <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{3,20}' required />\n\
+                                                                <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{1,20}' required />\n\
                                                                 <br>\n\
                                                                 <input type='submit' class='startBtn' id='join' value='Join' />\n\
                                                             </form>";
@@ -191,7 +190,7 @@
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share this with your friends to play together!</h2>\n\
                                                             <label for='ready' style='font-size: 2rem;'>I'm Ready\n\
-                                                                <input id='ready' type='checkbox' style='display: inline-block; width: 1.2rem; height: 1.2rem; margin: auto; margin-left: 0.5rem;' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":${this.checked}}`);'/>\n\
+                                                                <input id='ready' type='checkbox' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":${this.checked}}`);'/>\n\
                                                             </label>\n\
                                                             <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\
                                                             <ul id='playerList'></ul>";
