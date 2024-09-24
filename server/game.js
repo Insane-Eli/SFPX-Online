@@ -3,7 +3,7 @@ export default class PlanetXGame {
     constructor(code) {
         this.code = code;
         this.players = [];
-        this.seasons = ["winter", "spring", "summer", "autumn"];
+        this.seasons = ["spring", "summer", "autumn", "winter"];
     }
 
     addPlayer(name) {

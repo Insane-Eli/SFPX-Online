@@ -223,6 +223,8 @@ input[type="submit"].startBtn:hover {
     position: relative;
     /* Ensure positioning for floating effect */
     width: 70vw;
+    /* height: min-content; */
+    overflow: hidden;
 }
 
 .switch-toggle input {

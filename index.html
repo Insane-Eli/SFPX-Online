@@ -53,8 +53,6 @@
 
         <button class="startBtn" style="width: 70vw;" onclick="toggleOptions()"> Options </button>
 
-        </a>
-
         <div class="overlay" id="overlay"></div>
 
         <div class="options-tab" id="optionsTab"> <!-- options tab doesnt do anythign rn -->
@@ -181,8 +179,21 @@
                                                                 <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
                                                                 <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{1,20}' required />\n\
                                                                 <br>\n\
+                                                                <div class='switch-toggle switch-3 switch-candy' style=';'>\n\
+                                                                    <input id='youth' name='state-d' type='radio' />\n\
+                                                                    <label for='youth' >Youth (12 Facts)</label>\n\
+                                                                    <input id='beginner' name='state-d' type='radio' />\n\
+                                                                    <label for='beginner' >Beginner (8 Facts)</label>\n\
+                                                                    <br>\n\
+                                                                    <input id='expert' name='state-d' type='radio' />\n\
+                                                                    <label for='expert' >Expert (4 Facts)</label>\n\
+                                                                    <input id='genius' name='state-d' type='radio' />\n\
+                                                                    <label for='genius' >Genius (0 Facts)</label>\n\
+                                                                </div>\n\
+                                                                <br>\n\
                                                                 <input type='submit' class='startBtn' id='join' value='Join' />\n\
                                                             </form>";
+                                                            document.getElementById("beginner").click();
         }
 
         function gameJoined(code, name) {

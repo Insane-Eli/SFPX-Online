@@ -166,6 +166,7 @@ createServer(function (req, res) {
             Instances.forEach(element => {
                 used.push(element.code);
             });
+            console.log(exists)
             var exists = used.includes(body);
 
             console.log("Game " + body + " Exists: " + exists);
