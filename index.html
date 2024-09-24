@@ -93,6 +93,18 @@
             }
         }
 
+        function getPlayerDifficulty() {
+            if (document.getElementById("youth").checked) {
+                return 1;
+            } else if (document.getElementById("beginner").checked) {
+                return 2;
+            } else if (document.getElementById("expert").checked) {
+                return 3;
+            } else if (document.getElementById("genius").checked) {
+                return 4;
+            }
+        }
+
         // make user confirm page close
         window.onbeforeunload = function (e) {
             e = e || window.event;
@@ -127,8 +139,8 @@
                     alert(data.error);
 
                     if (data.error == "Username is taken" || data.error == "Game is full") {
-                        // window.onbeforeunload = () => { };
-                        // location.reload();
+                        window.onbeforeunload = () => { };
+                        location.reload();
                     }
                 }
                 if (data.players) {
@@ -148,26 +160,23 @@
             console.log("Disconnected");
 
             alert("Disconnected");
-            // window.onbeforeunload = () => { };
-            // location.reload();
+            window.onbeforeunload = () => { };
+            location.reload();
         };
 
         function gameCreated(data) {
             console.log(data);
             code = JSON.parse(data).code;
-            gameJoining(code, true);
+            gameJoining(code);
         }
 
-        async function gameJoining(code, force = false) {
+        async function gameJoining(code) {
 
-            if (!force) {
+            var error = await backend.checkGame(code);
 
-                var exists = await backend.gameExists(code);
-
-                if (!exists) {
-                    alert("Game does not exist");
-                    return;
-                }
+            if (error) {
+                alert(error);
+                return;
             }
 
             // Update HTML for New Game username input
@@ -175,25 +184,25 @@
                                                             <h2>Share this with your friends to play together!</h2>\n\
                                                             <br>\n\
                                                             <form id='joinForm' style='width: 70vw;'\n\
-                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value); gameJoined(" + code + ", document.getElementById(\"name\").value); return false;'>\n\
+                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value, getPlayerDifficulty()); gameJoined(" + code + ", document.getElementById(\"name\").value); return false;'>\n\
                                                                 <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
                                                                 <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{1,20}' required />\n\
                                                                 <br>\n\
                                                                 <div class='switch-toggle switch-3 switch-candy' style=';'>\n\
-                                                                    <input id='youth' name='state-d' type='radio' />\n\
+                                                                    <input id='youth' name='state-d' type='radio' checked=''/>\n\
                                                                     <label for='youth' >Youth (12 Facts)</label>\n\
-                                                                    <input id='beginner' name='state-d' type='radio' />\n\
+                                                                    <input id='beginner' name='state-d' type='radio' checked=''/>\n\
                                                                     <label for='beginner' >Beginner (8 Facts)</label>\n\
                                                                     <br>\n\
-                                                                    <input id='expert' name='state-d' type='radio' />\n\
+                                                                    <input id='expert' name='state-d' type='radio' checked=''/>\n\
                                                                     <label for='expert' >Expert (4 Facts)</label>\n\
-                                                                    <input id='genius' name='state-d' type='radio' />\n\
+                                                                    <input id='genius' name='state-d' type='radio' checked=''/>\n\
                                                                     <label for='genius' >Genius (0 Facts)</label>\n\
                                                                 </div>\n\
                                                                 <br>\n\
                                                                 <input type='submit' class='startBtn' id='join' value='Join' />\n\
                                                             </form>";
-                                                            document.getElementById("beginner").click();
+            document.getElementById("beginner").click();
         }
 
         function gameJoined(code, name) {
