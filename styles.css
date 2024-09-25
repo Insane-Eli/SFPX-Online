@@ -244,8 +244,8 @@ input[type="submit"].startBtn:not(:disabled):hover {
     width: 70vw;
     height: min-content;
     overflow: hidden;
-    
-    /* display: block; */
+
+    justify-content: space-between;
 }
 
 .switch-toggle input {
