@@ -9,16 +9,20 @@ body {
     color: whitesmoke;
     /* background: url("images/bgOG.png"); */
     background: #143748 url("images/bg.png") no-repeat center center/cover;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
 }
 
 h1 {
-    font-size: 6em;
+    font-size: 4em;
     margin: auto;
 }
 
 h2 {
-    font-size: 3em;
+    font-size: 2em;
     margin: auto;
 }
 
