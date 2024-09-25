@@ -8,12 +8,12 @@ class PlanetXBackend {
         this.onDisconnect = () => { console.log("Disconnected") };
     }
 
-    joinGame(code, name) {
+    joinGame(code, name, difficulty) {
         this.ws = new WebSocket(`ws://${this.serverIP}:${code}`);
 
         this.ws.onopen = () => {
             this.onConnect();
-            this.ws.send(`{"cmd": "join", "value": "${name}"}`);
+            this.ws.send(`{"cmd": "join", "value": "${name}", "difficulty": ${difficulty}}`);
         }
 
         this.ws.onmessage = (data) => {
@@ -37,13 +37,13 @@ class PlanetXBackend {
         this.ws.send(data);
     }
 
-    async gameExists(code) {
-        var exists = false;
+    async checkGame(code) {
+        var error = "";
         await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: code }).then(async data => {
             var data = await data.text();
-            exists = JSON.parse(data).exists;
+            error = JSON.parse(data).message;
         });
-        return exists;
+        return error;
     }
 
 }

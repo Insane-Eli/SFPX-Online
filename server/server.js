@@ -54,7 +54,7 @@ class GameInstance {
                                     ws.terminate();
                                 } else {
                                     console.log(printPrefix + "Adding Player " + json.value);
-                                    self.game.addPlayer(json.value);
+                                    self.game.addPlayer(json.value, difficulty);
                                     self.clients.push(ws);
 
                                     self.broadcast(`{"players":` + JSON.stringify(self.game.players) + `}`);
@@ -161,17 +161,32 @@ createServer(function (req, res) {
                 res.write('{"code":' + gamecode + '}'); //write a response to the client
             }
         } else {
-            var used = []
 
+            var exists = false;
+            var full = false;
             Instances.forEach(element => {
-                used.push(element.code);
+                // used.push(element.code);
+
+                if (element.code == parseInt(body)) {
+                    exists = true;
+
+                    console.log("Game " + body + " exists and has " + element.game.players.length + " players");
+
+                    if (element.game.players.length >= 4) {
+                        full = true;
+                        res.write("{\"message\":\"Game is full\"}");
+                    }
+                }
             });
-            console.log(exists)
-            var exists = used.includes(body);
 
-            console.log("Game " + body + " Exists: " + exists);
+            if (!exists) {
+                console.log("Game " + body + " does not exist");
+                res.write("{\"message\":\"Game does not exist\"}");
+            }
 
-            res.write("{\"exists\":" + exists + "}");
+            if (!full && exists) {
+                res.write('{"message":""}');
+            }
         }
 
         res.end(); //end the response

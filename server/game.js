@@ -6,9 +6,9 @@ export default class PlanetXGame {
         this.seasons = ["spring", "summer", "autumn", "winter"];
     }
 
-    addPlayer(name) {
+    addPlayer(name, difficulty) {
         var season = this.seasons[this.players.length];
-        this.players.push(new Player(name, season));
+        this.players.push(new Player(name, season, difficulty));
     }
 
     removePlayer(name) {
@@ -26,9 +26,10 @@ export default class PlanetXGame {
 }
 
 class Player {
-    constructor(name, season) {
+    constructor(name, season, difficulty) {
         this.name = name;
         this.ready = false;
         this.season = season;
+        this.difficulty = difficulty;
     }
 }
