@@ -239,7 +239,7 @@ input[type="submit"].startBtn:not(:disabled):hover {
     margin: 2px;
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     /* Ensure positioning for floating effect */
     width: 70vw;
