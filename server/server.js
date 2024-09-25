@@ -170,9 +170,9 @@ createServer(function (req, res) {
                 if (element.code == parseInt(body)) {
                     exists = true;
 
-                    console.log("Game " + body + " exists");
+                    console.log("Game " + body + " exists and has " + element.game.players.length + " players");
 
-                    if (element.game.players.length > 4) {
+                    if (element.game.players.length >= 4) {
                         full = true;
                         res.write("{\"message\":\"Game is full\"}");
                     }
