@@ -18,13 +18,15 @@ body {
 
 
 h1 {
-    font-size: 4em;
-    margin: auto;
+    font-size: 6em;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
 }
 
 h2 {
-    font-size: 2em;
-    margin: auto;
+    font-size: 3em;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
 }
 
 input {
@@ -56,11 +58,12 @@ input {
     margin: 2px;
     position: relative;
     /* Ensure positioning for floating effect */
-    width: 100%;
+    width: 70vw;
+    /* width: 100%; */
 }
 
-button.startBtn:hover,
-input[type="submit"].startBtn:hover {
+button.startBtn:not(:disabled):hover,
+input[type="submit"].startBtn:not(:disabled):hover {
     background-color: #333333;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     /* More shadow on hover */
@@ -68,7 +71,7 @@ input[type="submit"].startBtn:hover {
     /* Start floating animation on hover */
 }
 
-.startBtn:active {
+.startBtn:not(:disabled):active {
     background-color: #0f0f0f;
     /* Darker background on click */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -77,6 +80,11 @@ input[type="submit"].startBtn:hover {
     /* Reset lift */
     animation: none;
     /* Stop animation when button is clicked */
+}
+
+.startBtn:disabled {
+    opacity: 0.7;
+    cursor: default;
 }
 
 .closeBtn {
@@ -201,7 +209,7 @@ input[type="submit"].startBtn:hover {
     border-radius: 4px;
 
     &>img {
-        height: 1.1em;
+        height: 1.3em;
         margin-right: 0.5em;
         vertical-align: middle;
         display: inline-block;
@@ -216,7 +224,6 @@ input[type="submit"].startBtn:hover {
     font-family: 'Staatliches', sans-serif;
     background-color: #222222;
     color: whitesmoke;
-    /* padding: 12px 24px; */
     /* Spacious padding for a clean appearance */
     font-size: 3vw;
     /* Slightly larger text for readability */
@@ -236,8 +243,10 @@ input[type="submit"].startBtn:hover {
     justify-content: center;
     /* Ensure positioning for floating effect */
     width: 70vw;
-    /* height: min-content; */
+    height: min-content;
     overflow: hidden;
+
+    justify-content: space-between;
 }
 
 .switch-toggle input {
@@ -249,9 +258,10 @@ input[type="submit"].startBtn:hover {
     color: #fff;
     cursor: pointer;
     text-align: center;
-    width: 50%;
+    width: 48.2542476654%;
     padding: 7px 0;
     border-radius: 3px;
+    padding: 12px 7px;
 }
 
 .switch-toggle input:checked+label {
@@ -280,6 +290,8 @@ input[type="checkbox"] {
 
     display: grid;
     place-content: center;
+
+    cursor: pointer;
 }
 
 input[type="checkbox"]::before {

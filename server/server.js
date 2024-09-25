@@ -118,11 +118,15 @@ console.log("\
    \\/_/     \\/_____/   \\/_/\\/_/   \\/_/ \\/_/   \\/_____/     \\/_/      \\/_/\\/_/ \n\
     ");
 
-console.log("Starting Webpage");
+// console.log("Starting Webpage");
+
+var sudo = false;
+var uid = parseInt(process.env.SUDO_UID);
+if (uid) sudo = true;
 
 connect()
     .use(serveStatic('../'))
-    .listen(80, () => { /*console.log('Webpage Started on Port 8080')*/ });
+    .listen(sudo ? 80 : 8080, () => { console.log('Webpage Started on Port ' + (sudo ? 80 : 8080)) });
 
 //create a server object:
 createServer(function (req, res) {
@@ -130,8 +134,6 @@ createServer(function (req, res) {
     res.setHeader('Access-Control-Request-Method', '*');
     res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     res.setHeader('Access-Control-Allow-Headers', '*');
-
-    // console.log("Created new Game on port " + gamecode);
 
     let body = "";
     req.on('data', (chunk) => {
@@ -193,7 +195,26 @@ createServer(function (req, res) {
     });
 
 }).listen(4000); //the server object listens on port 4000
-// console.log("Webpage Started at http://" + (http.address().address == "::" ? "localhost" : http.address().address) + ":" + 8080);
-// console.log("Webpage Started at http://planetx.local");
 
-console.log("Waiting for game to be created...");
+import { networkInterfaces } from 'os';
+
+const nets = networkInterfaces();
+const results = Object.create(null); // Or just '{}', an empty object
+
+for (const name of Object.keys(nets)) {
+    for (const net of nets[name]) {
+        // Skip over non-IPv4 and internal (i.e. 127.0.0.1) addresses
+        // 'IPv4' is in Node <= 17, from 18 it's a number 4 or 6
+        const familyV4Value = typeof net.family === 'string' ? 'IPv4' : 4
+        if (net.family === familyV4Value /*&& !net.internal*/) {
+            if (!results[name]) {
+                results[name] = [];
+            }
+            results[name].push(net.address);
+        }
+    }
+}
+
+console.log(results);
+
+// console.log("Waiting for game to be created...");
