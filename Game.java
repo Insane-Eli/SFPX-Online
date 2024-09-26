@@ -15,23 +15,24 @@ public class Game {
         boolean hasCon = false;
         boolean correct = false;
         int start = 1;
+        int end;
         int lastStart = 1;
-        int theoAmount;
+        int theoAmount = 0;
         int[][] locVal = new int[4][3];
-        for(int i = 0; i < 4; i++){
-            locVal[i][1] = i+1;
+        for (int i = 0; i < 4; i++) {
+            locVal[i][1] = i + 1;
             locVal[i][0] = 1;
         }
         int[] sector = new int[12];
-        for(int i = 0; i < 12; i++){
+        for (int i = 0; i < 12; i++) {
             sector[i] = rand.nextInt(6);
         }
 
-        while(!xFound){
+        while (!xFound) {
 
             System.out.println("Enter move (Player " + locVal[0][1] + ")");
-            switch(input.nextLine().toLowerCase()){
-                case "survey" :
+            switch (input.nextLine().toLowerCase()) {
+                case "survey":
                     System.out.println("For what?");
                     int obj = input.nextInt();
                     System.out.println("Start Where?");
@@ -41,12 +42,14 @@ public class Game {
                     temp = input.nextLine();
                     int range = 0;
                     int tsStart = sStart;
-                    while(tsStart != (sEnd + 1)%12){
-                        tsStart = (tsStart + 1)%12;
+                    while (tsStart != (sEnd + 1) % 12) {
+                        tsStart = (tsStart + 1) % 12;
                         range++;
                     }
-                    if(range < 4) locVal[0][0] += 4;
-                    else locVal[0][0] += 3;
+                    if (range < 4)
+                        locVal[0][0] += 4;
+                    else
+                        locVal[0][0] += 3;
                     int amount = Function.search(sStart, range, obj, sector);
                     System.out.println("Your survey has found " + amount);
                     break;
@@ -57,85 +60,120 @@ public class Game {
                     System.out.println("Which Sector?");
                     int targSec = input.nextInt();
                     temp = input.nextLine();
-                    System.out.println("There is a " + sector[targSec-1] + " in " + targSec);
+                    System.out.println("There is a " + sector[targSec - 1] + " in " + targSec);
                     locVal[0][0] += 4;
                     break;
                 case "x":
                     System.out.println("Enter Location of Planet X");
                     int xLoc = input.nextInt();
                     int preXLoc = xLoc - 1;
-                    if(preXLoc == 0) preXLoc += 12;
+                    if (preXLoc == 0)
+                        preXLoc += 12;
                     System.out.println("Enter object in sector " + preXLoc);
                     int preObj = input.nextInt();
-                    int postXLoc = (xLoc + 1)%12;
-                    if(postXLoc == 0) postXLoc += 12;
+                    int postXLoc = (xLoc + 1) % 12;
+                    if (postXLoc == 0)
+                        postXLoc += 12;
                     System.out.println("Enter object in sector " + postXLoc);
                     int postObj = input.nextInt();
                     temp = input.nextLine();
-                    if(preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1] && xLoc - 1 == Function.findIndex(sector, 5)){
+                    if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
+                            && xLoc - 1 == Function.findIndex(sector, 5)) {
                         System.out.println("You have found Planet X");
                         locVal[0][2] += 10;
                         xFound = true;
-                    } else System.out.println("You have failed to find Planet X");
+                    } else
+                        System.out.println("You have failed to find Planet X");
                     locVal[0][0] += 5;
             }
 
             Function.sort(locVal);
-            for(int i = 0; i < 4; i++){
+            for (int i = 0; i < 4; i++) {
 
-                int secNum = locVal[i][0]%12;
-                if(secNum == 0) secNum += 12;
-                System.out.print("Player " + locVal[i][1] + " : " + secNum + " | ");
+                int secNum = locVal[i][0] % 12;
+                if (secNum == 0)
+                    secNum += 12;
+                System.out.print("Player " + locVal[i][1] + " : " + " in " + secNum + " with " + locVal[i][2] + " | ");
             }
-            start = locVal[0][0]%12;
-            if(start == 0) start = 12;
-            int end = (start + 5)%12;
-            if(end == 0) end = 12;
-            System.out.println("Visible Sectors: " + start + " - " + end );
-            
-            for(int i = 1; i <= 10; i += 3) {
-                for(int j = i; j <= locVal[0][0];j += 12) {
-                    if(j > lastStart) theoAmount++;
+            start = locVal[0][0] % 12;
+            if (start == 0)
+                start = 12;
+            end = (start + 5) % 12;
+            if (end == 0)
+                end = 12;
+            System.out.println("Visible Sectors: " + start + " - " + end);
+
+            for (int i = 1; i <= 10; i += 3) {
+                for (int j = i; j <= locVal[0][0]; j += 12) {
+                    if (j > lastStart)
+                        theoAmount++;
                 }
             }
-            for(int i = 0; i < theoAmount; i++) {
-                for(int i = 0; i < 4; i++) {
-                    System.out.println("Player " + locVal[i][1] +", Enter Theory Location" );
+            for (int i = 0; i < theoAmount; i++) {
+                for (int j = 0; j < 4; j++) {
+                    System.out.println("Player " + locVal[j][1] + ", Enter Theory Location");
                     String theoryLocation = input.nextLine();
-                    if((!theoryLocation.isEmpty())){
+                    if ((!theoryLocation.isEmpty())) {
                         System.out.println("Enter Object in Location");
                         int theoryObject = input.nextInt();
-                        theories.add(new Theory(theoryObject, locVal[i][1], Integer.parseInt(theoryLocation)));
+                        temp = input.nextLine();
+                        theories.add(new Theory(theoryObject, locVal[j][1], Integer.parseInt(theoryLocation)));
                     }
                 }
-                for (Theory theory : theories) theory.position -= 1;
-                for(int i = 1; i < 13; i++){
-                    for(Theory theory : theories){
-                        if((theory.position == 0 || correct) && theory.sector == i){
-                             if(theory.type == sector[i-1]) {
-                                System.out.println("Player " + locVal[theory.player][1] + "is Correct, " + theory.type + "is in " + theory.sector);
-                                locVal[theory.player][2] += 3;
+                for (Theory theory : theories)
+                    theory.position -= 1;
+                for (int j = 1; j < 13; j++) {
+                    for (Theory theory : theories) {
+                        if ((theory.position == 0 || correct) && theory.sector == j) {
+                            if (theory.type == sector[j - 1]) {
+                                System.out.println("Player " + theory.player + " is Correct, " + theory.type
+                                        + " is in " + theory.sector);
+                                locVal[Function.findIndex(locVal, theory.player)][2] += 3;
                                 correct = true;
-                                if(theory.position == 0) locVal[theory.player][2]++;
-                             } else {
-                                 System.out.println("Player " + locVal[theory.player][1] + "is Incorrect, " + theory.type + "is not in " + theory.sector);
-                                 locVal[theory.player][0] += 1;
-                             }
+                                if (theory.position == 0)
+                                    locVal[Function.findIndex(locVal, theory.player)][2]++;
+                            } else {
+                                System.out.println("Player " + theory.player + " is Incorrect, " + theory.type
+                                        + "is not in " + theory.sector);
+                                locVal[Function.findIndex(locVal, theory.player)][0] += 1;
+                            }
                         }
                     }
                 }
                 Function.sort(locVal);
+                for (int j = 0; j < 4; j++) {
+                    int secNum = locVal[j][0] % 12;
+                    if (secNum == 0)
+                        secNum += 12;
+                    System.out.print(
+                            "Player " + locVal[j][1] + " : " + " in " + secNum + " with " + locVal[j][2] + " | ");
+                }
+                start = locVal[0][0] % 12;
+                if (start == 0)
+                    start = 12;
+                end = (start + 5) % 12;
+                if (end == 0)
+                    end = 12;
+                System.out.println("Visible Sectors: " + start + " - " + end);
             }
+
             lastStart = locVal[0][0];
             theoAmount = 0;
 
-            if(locVal[0][1] > 12 && !hasCon){
+            if (locVal[0][0] > 12 && !hasCon) {
                 int reveal = rand.nextInt(12);
                 System.out.println("Conference: There is a " + sector[reveal] + " in Sector " + (reveal + 1));
                 hasCon = true;
             }
         }
-
+        for(int i = 0; i < 4; i++){
+            locVal[i][0] = locVal[i][1];
+        }
+        Function.sort(locVal);
+        for(int i = 0; i < 4; i++){
+            System.out.println("Player " + locVal[i][1] + " Has " + locVal[i][2] + " Points");
+        }
+        System.out.print("The Winner is Player " + locVal[0][1]);
     }
 }
 
@@ -145,7 +183,7 @@ class Function {
         int a, b, c;
         boolean d = true;
 
-        while(d) {
+        while (d) {
 
             d = false;
 
@@ -169,13 +207,23 @@ class Function {
         return locVal;
     }
 
-    public static int search(int start, int range, int obj, int[] sector){
+    public static int search(int start, int range, int obj, int[] sector) {
         int amount = 0;
         start--;
-        for(int i = 0; i < range; i++){
-            if(obj == sector[start + i]) amount++;
+        for (int i = 0; i < range; i++) {
+            if (obj == sector[start + i])
+                amount++;
         }
         return amount;
+    }
+
+    public static int findIndex(int[][] array, int element) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i][1] == element) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public static int findIndex(int[] array, int element) {
@@ -188,9 +236,9 @@ class Function {
     }
 }
 
-class Theory{
+class Theory {
 
-    public Theory(int type, int player, int sector){
+    public Theory(int type, int player, int sector) {
         position = 3;
         this.type = type;
         this.player = player;
