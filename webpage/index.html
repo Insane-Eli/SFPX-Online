@@ -199,7 +199,7 @@
                                                             <h2>Share the code with your friends to play together!</h2>\n\
                                                             <br>\n\
                                                             <form id='joinForm' style='width: 70vw;'\n\
-                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value.toUpperCase(), getPlayerDifficulty()); gameJoined(" + code + ", document.getElementById(\"name\").value); return false;'>\n\
+                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value.toUpperCase(), getPlayerDifficulty()); gameJoined(" + code + ", document.getElementById(\"name\").value.toUpperCase()); return false;'>\n\
                                                                 <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
                                                                 <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{1,20}' required />\n\
                                                                 <br>\n\
