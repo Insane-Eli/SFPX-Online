@@ -7,7 +7,6 @@
 body {
     background-color: rgb(34, 34, 34);
     color: whitesmoke;
-    /* background: url("images/bgOG.png"); */
     background: #143748 url("images/bg.png") no-repeat center center/cover;
     display: flex;
     justify-content: center;
@@ -15,7 +14,6 @@ body {
     height: 100vh;
     
 }
-
 
 h1 {
     font-size: 6em;
