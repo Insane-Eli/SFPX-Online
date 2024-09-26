@@ -166,11 +166,11 @@ public class Game {
                 hasCon = true;
             }
         }
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             locVal[i][0] = locVal[i][1];
         }
         Function.sort(locVal);
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             System.out.println("Player " + locVal[i][1] + " Has " + locVal[i][2] + " Points");
         }
         System.out.print("The Winner is Player " + locVal[0][1]);
