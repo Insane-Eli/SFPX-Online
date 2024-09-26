@@ -125,7 +125,7 @@ var uid = parseInt(process.env.SUDO_UID);
 if (uid) sudo = true;
 
 connect()
-    .use(serveStatic('../'))
+    .use(serveStatic('./webpage'))
     .listen(sudo ? 80 : 8080, () => { console.log('Webpage Started on Port ' + (sudo ? 80 : 8080)) });
 
 //create a server object:

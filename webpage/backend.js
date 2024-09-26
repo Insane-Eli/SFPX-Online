@@ -1,7 +1,7 @@
 class PlanetXBackend {
 
     constructor() {
-        this.serverIP = "localhost";
+        this.serverIP = location.href.split("/")[2];
         this.ws = null;
         this.onRecieve = () => { };
         this.onConnect = () => { console.log("Connected") };
@@ -27,9 +27,11 @@ class PlanetXBackend {
 
     async createGame(difficulty) {
         var code = 0;
-        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: difficulty }).then(data => {
-            code = data.text();
-        });
+        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: difficulty })
+            .then((response) => response.text())
+            .then((text) => {
+                code = text;
+            });
         return code;
     }
 
@@ -39,10 +41,11 @@ class PlanetXBackend {
 
     async checkGame(code) {
         var error = "";
-        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: code }).then(async data => {
-            var data = await data.text();
-            error = JSON.parse(data).message;
-        });
+        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: code })
+            .then(response => response.text())
+            .then(data => {
+                error = JSON.parse(data).message;
+            });
         return error;
     }
 

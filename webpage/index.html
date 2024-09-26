@@ -11,12 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet" >
     <link rel="stylesheet" href="styles.css">
-    <script src="server/backend.js"></script>
+    <script src="backend.js"></script>
 </head>
 
 <body>
     <div id="content"
-        style="display: flex;position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow-y: scroll; align-items: center; flex-wrap: wrap; flex-direction: column; align-content: center; justify-content: center;">
+        style="display: flex; position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow-y: scroll; align-items: center; flex-wrap: nowrap; flex-direction: column; align-content: center; justify-content: flex-start;">
         <!-- <h1 style="margin: 0.5em;"> The Search for Planet X </h1> -->
         <img src="images/logo.png" style="width: 50vw; padding: 0 10vw;" />
         <!-- <button class="startBtn" onclick="location.href='createGame.html'"> New Game </button> -->
@@ -151,13 +151,14 @@
                     var playerList = document.getElementById("playerList");
                     playerList.innerHTML = "";
                     for (var i = 0; i < data.players.length; i++) {
-                        // playerList.innerHTML += "<li>" + data.players[i].name + "&nbsp;" + (data.players[i].ready ? "&#10004;" : "&#10006;") + "</li>";
                         playerList.innerHTML += "<li><img src='./images/seasons/" + data.players[i].season + ".png' />" + data.players[i].name + "<span style='float: right;'></span><span style='float: right; background-color: " + (data.players[i].ready ? "lime" : "red") + "; box-shadow: 0 0 6px " + (data.players[i].ready ? "lime" : "red") + "; width: 15px; height: 15px; margin: 12px; border-radius: 50%; display: inline-block;'></span></li>";
                     }
 
                     if (data.players.length == 4) {
                         if (data.players[0].ready && data.players[1].ready && data.players[2].ready && data.players[3].ready) {
                             document.getElementById('startBtn').disabled = false;
+                        } else {
+                            document.getElementById('startBtn').disabled = true;
                         }
                     }
                 }
@@ -198,7 +199,7 @@
                                                             <h2>Share the code with your friends to play together!</h2>\n\
                                                             <br>\n\
                                                             <form id='joinForm' style='width: 70vw;'\n\
-                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value, getPlayerDifficulty()); gameJoined(" + code + ", document.getElementById(\"name\").value); return false;'>\n\
+                                                                onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value.toUpperCase(), getPlayerDifficulty()); gameJoined(" + code + ", document.getElementById(\"name\").value.toUpperCase()); return false;'>\n\
                                                                 <label for='name' style='font-size: 2rem;'>Player Name:</label>\n\
                                                                 <input id='name' class='startBtn' pattern='[0-9a-zA-Z]{1,20}' required />\n\
                                                                 <br>\n\
@@ -208,7 +209,6 @@
                                                                     <label for='youth' >Youth (12 Facts)</label>\n\
                                                                     <input id='beginner' name='state-d' type='radio' checked=''/>\n\
                                                                     <label for='beginner' >Beginner (8 Facts)</label>\n\
-                                                                    <br>\n\
                                                                     <input id='expert' name='state-d' type='radio' checked=''/>\n\
                                                                     <label for='expert' >Expert (4 Facts)</label>\n\
                                                                     <input id='genius' name='state-d' type='radio' checked=''/>\n\

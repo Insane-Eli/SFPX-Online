@@ -7,7 +7,6 @@
 body {
     background-color: rgb(34, 34, 34);
     color: whitesmoke;
-    /* background: url("images/bgOG.png"); */
     background: #143748 url("images/bg.png") no-repeat center center/cover;
     display: flex;
     justify-content: center;
@@ -15,7 +14,6 @@ body {
     height: 100vh;
     
 }
-
 
 h1 {
     font-size: 6em;
@@ -239,7 +237,7 @@ input[type="submit"].startBtn:not(:disabled):hover {
     margin: 2px;
     position: relative;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: center;
     /* Ensure positioning for floating effect */
     width: 70vw;
@@ -258,10 +256,10 @@ input[type="submit"].startBtn:not(:disabled):hover {
     color: #fff;
     cursor: pointer;
     text-align: center;
-    width: 48.2542476654%;
+    width: 50%;
     padding: 7px 0;
     border-radius: 3px;
-    padding: 12px 7px;
+    text-wrap: nowrap;
 }
 
 .switch-toggle input:checked+label {
