@@ -1,7 +1,7 @@
 class PlanetXBackend {
 
     constructor() {
-        this.serverIP = "localhost";
+        this.serverIP = location.href.split("/")[2];
         this.ws = null;
         this.onRecieve = () => { };
         this.onConnect = () => { console.log("Connected") };
