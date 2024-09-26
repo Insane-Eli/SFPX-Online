@@ -11,12 +11,12 @@ public class Game {
         ArrayList<Theory> theories = new ArrayList<Theory>();
 
         String temp;
-        boolean hasTheo;
         boolean xFound = false;
         boolean hasCon = false;
         boolean correct = false;
         int start = 1;
-        int lastStart;
+        int lastStart = 1;
+        int theoAmount;
         int[][] locVal = new int[4][3];
         for(int i = 0; i < 4; i++){
             locVal[i][1] = i+1;
@@ -87,16 +87,19 @@ public class Game {
                 if(secNum == 0) secNum += 12;
                 System.out.print("Player " + locVal[i][1] + " : " + secNum + " | ");
             }
-
-            lastStart = start;
             start = locVal[0][0]%12;
             if(start == 0) start = 12;
             int end = (start + 5)%12;
             if(end == 0) end = 12;
             System.out.println("Visible Sectors: " + start + " - " + end );
-
-            if(start == 1||((lastStart < 4)&&(4 <= start))||start == 7||start == 10){
-                for(int i = 0; i < 4; i++){
+            
+            for(int i = 1; i <= 10; i += 3) {
+                for(int j = i; j <= locVal[0][0];j += 12) {
+                    if(j > lastStart) theoAmount++;
+                }
+            }
+            for(int i = 0; i < theoAmount; i++) {
+                for(int i = 0; i < 4; i++) {
                     System.out.println("Player " + locVal[i][1] +", Enter Theory Location" );
                     String theoryLocation = input.nextLine();
                     if((!theoryLocation.isEmpty())){
@@ -111,7 +114,7 @@ public class Game {
                         if((theory.position == 0 || correct) && theory.sector == i){
                              if(theory.type == sector[i-1]) {
                                 System.out.println("Player " + locVal[theory.player][1] + "is Correct, " + theory.type + "is in " + theory.sector);
-                                locVal[theory.player][2] +=3;
+                                locVal[theory.player][2] += 3;
                                 correct = true;
                                 if(theory.position == 0) locVal[theory.player][2]++;
                              } else {
@@ -123,6 +126,9 @@ public class Game {
                 }
                 Function.sort(locVal);
             }
+            lastStart = locVal[0][0];
+            theoAmount = 0;
+
             if(locVal[0][1] > 12 && !hasCon){
                 int reveal = rand.nextInt(12);
                 System.out.println("Conference: There is a " + sector[reveal] + " in Sector " + (reveal + 1));
@@ -195,5 +201,4 @@ class Theory{
     public int type;
     public int player;
     public int sector;
-
 }
