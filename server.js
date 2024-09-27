@@ -22,7 +22,7 @@ class GameInstance {
 
         var self = this;
 
-        console.log(printPrefix + "Started with difficulty " + difficulty);
+        console.log(printPrefix + "Created with difficulty " + difficulty);
 
         this.wss.on('connection', function connection(ws) {
             ws.on('message', function message(data) {
@@ -77,6 +77,11 @@ class GameInstance {
                                 self.game.getPlayer(json.player).ready = json.value;
                                 console.log(printPrefix + "Setting Player " + json.player + " ready to " + json.value);
                                 self.broadcast(`{"players":` + JSON.stringify(self.game.players) + `}`);
+                                break;
+
+                            case 'start':
+                                self.game.start();
+                                self.broadcast(`{"cmd":"start"}`);
                                 break;
                         }
                     }

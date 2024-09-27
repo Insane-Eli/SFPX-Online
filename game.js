@@ -23,6 +23,10 @@ export default class PlanetXGame {
         }
     }
 
+    start() {
+        console.log("Game " + this.code + " started");
+    }
+
 }
 
 class Player {
