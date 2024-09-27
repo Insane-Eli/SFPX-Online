@@ -15,7 +15,7 @@ public class Game {
         boolean xFound = false;
         boolean hasCon = false;
         boolean correct = false;
-        int start = 1;
+        int start;
         int end;
         int lastStart = 1;
         int theoAmount = 0;
@@ -180,6 +180,7 @@ public class Game {
                 hasCon = true;
             }
         }
+        
         for (int i = 0; i < 4; i++) {
             locVal[i][0] = locVal[i][1];
         }
