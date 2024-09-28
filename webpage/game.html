@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="server/backend.js"></script>
+    <script src="backend.js"></script>
 </head>
 
 <body>
@@ -22,15 +22,18 @@
 
         <script>
 
-            var params = location.href.split('?')[1].split('&');
-            // var backend = PlanetXBackend.from(JSON.parse(params[0].split('=')[1]));
-            var b = params[0].split('=')[1];
-            var backend = new PlanetXBackend(b);
+            var post = location.href.split('?')[1].split('&');
+            var params = post.map((x) => x.split('='));
 
+            params.forEach(element => {
+                if (element[0] == "port") {
+                    backend = new PlanetXBackend(element[1]);
+                }
+            });
 
             window.onkeydown = (e) => {
                 if (e.key == "p")
-                    backend.send("{msg: 'ping'}");
+                    backend.send('{"msg": "ping"}');
             }
         </script>
     </div>

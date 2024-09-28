@@ -1,8 +1,14 @@
 class PlanetXBackend {
 
-    constructor() {
+    constructor(port) {
         this.serverIP = location.href.split("/")[2];
+        this.port = port;
         this.ws = null;
+        if (this.port) {
+            this.ws = new WebSocket(`ws://${this.serverIP}:${port}`);
+        }
+        this.name = null;
+        this.difficulty = 0;
         this.onRecieve = () => { };
         this.onConnect = () => { console.log("Connected") };
         this.onDisconnect = () => { console.log("Disconnected") };
@@ -10,6 +16,9 @@ class PlanetXBackend {
 
     joinGame(code, name, difficulty) {
         this.ws = new WebSocket(`ws://${this.serverIP}:${code}`);
+        this.port = code;
+        this.name = name;
+        this.difficulty = difficulty;
 
         this.ws.onopen = () => {
             this.onConnect();

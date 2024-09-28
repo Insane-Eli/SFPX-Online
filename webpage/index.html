@@ -9,7 +9,7 @@
     <!-- Font: -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet" >
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="backend.js"></script>
 </head>
@@ -234,8 +234,8 @@
             document.title = code + " | The Search for Planet X";
         }
 
-        function startGame() {
-            document.getElementById("content").innerHTML = "<iframe id='game' src='game.html?backend=" + "Chicken Butt" + "' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0'></iframe>";
+        function startGame(code) {
+            document.getElementById("content").innerHTML = "<iframe id='game' src='game.html?port=" + backend.port + "' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0'></iframe>";
         };
 
     </script>
