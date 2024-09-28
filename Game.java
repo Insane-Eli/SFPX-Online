@@ -19,6 +19,7 @@ public class Game {
         int end;
         int lastStart = 1;
         int theoAmount = 0;
+        int finderOfX = -1;
         int[][] locVal = new int[4][3];
         for (int i = 0; i < 4; i++) {
             locVal[i][1] = i + 1;
@@ -84,6 +85,7 @@ public class Game {
                     if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
                             && xLoc - 1 == Function.findIndex(sector, 5)) {
                         System.out.println("You have found Planet X");
+                        finderOfX = locVal[0][1];
                         locVal[0][2] += 10;
                         xFound = true;
                     } else {
@@ -180,7 +182,27 @@ public class Game {
                 hasCon = true;
             }
         }
-        
+
+        for (int i = Function.findIndex(locVal, finderOfX); i < 3; i++) {
+            int a, b, c;
+            a = locVal[i + 1][0];
+            b = locVal[i + 1][1];
+            c = locVal[i + 1][2];
+            locVal[i + 1][0] = locVal[i][0];
+            locVal[i + 1][0] = locVal[i][1];
+            locVal[i + 1][0] = locVal[i][2];
+            locVal[i][0] = a;
+            locVal[i][1] = b;
+            locVal[i][2] = c;
+        }
+        for (int i = 0; i < 3; i++) {
+            System.out.println("Final Selection, Theory or X, Player" + locVal[i][1]);
+            if (input.nextLine().toLowerCase() == "theory") {
+                
+            } else {
+
+            }
+        }
         for (int i = 0; i < 4; i++) {
             locVal[i][0] = locVal[i][1];
         }
