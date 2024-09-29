@@ -28,92 +28,133 @@
             const canvas = document.querySelector("canvas");
             const ctx = canvas.getContext("2d");
 
-            // var img = new Image();
-            // img.src = "images/board.jpeg";
-            // img.onload = function () {
-            //     ctx.drawImage(img, 0, -18, 1000, 1000);
-            // };
+            var visible = 1;
 
-            var blue = "rgb(80, 183, 249)";
-            var yellow = "rgb(255, 255, 0)";
-            var gray = "rgb(128, 128, 128)";
-            var darkGray = "rgb(60, 60, 60)";
+            function drawBoard() {
+                ctx.clearRect(0, 0, 1000, 1000);
 
-            ctx.strokeStyle = blue;
-            ctx.beginPath();
-            ctx.arc(500, 500, 430, 0, 2 * Math.PI);
-            ctx.stroke();
+                // var img = new Image();
+                // img.src = "images/board.jpeg";
+                // img.onload = function () {
+                //     ctx.drawImage(img, 0, -18, 1000, 1000);
+                // };
 
-            ctx.beginPath();
-            ctx.arc(500, 500, 380, 0, 2 * Math.PI);
-            ctx.stroke();
+                var blue = "rgb(80, 183, 249)";
+                var darkblue = "rgb(20, 20, 80)";
+                var yellow = "rgb(255, 255, 0)";
+                var gray = "rgb(128, 128, 128)";
+                var darkGray = "rgb(60, 60, 60)";
 
-            var angle = ((2 * Math.PI) / 12);
-            var start = Math.PI - (angle / 2);
-            var startx = Math.sin(start - (angle / 2));
-            var starty = Math.cos(start - (angle / 2));
-
-            for (let i = 0; i < 12; i++) {
                 ctx.strokeStyle = blue;
                 ctx.beginPath();
-                ctx.moveTo(500 + startx * 430, 500 + starty * 430);
-                ctx.lineTo(500, 500);
+                ctx.arc(500, 500, 430, 0, 2 * Math.PI);
                 ctx.stroke();
 
+                ctx.beginPath();
+                ctx.arc(500, 500, 380, 0, 2 * Math.PI);
+                ctx.stroke();
+
+                var angle = ((2 * Math.PI) / 12);
+                var start = Math.PI - (angle / 2);
+                var startx = Math.sin(start - (angle / 2));
+                var starty = Math.cos(start - (angle / 2));
+
+                for (let i = 0; i < 12; i++) {
+                    ctx.strokeStyle = blue;
+                    ctx.beginPath();
+                    ctx.moveTo(500 + startx * 430, 500 + starty * 430);
+                    ctx.lineTo(500, 500);
+                    ctx.stroke();
+
+                    ctx.translate(500, 500);
+                    ctx.rotate(angle);
+                    ctx.translate(-500, -500);
+                }
+
                 ctx.translate(500, 500);
-                ctx.rotate(angle);
+                ctx.rotate(angle / 2);
                 ctx.translate(-500, -500);
-            }
 
-            ctx.translate(500, 500);
-            ctx.rotate(angle / 2);
-            ctx.translate(-500, -500);
+                for (let i = 0; i < 12; i++) {
 
-            for (let i = 0; i < 12; i++) {
-                // start = Math.PI - angle * i;
-                // startx = Math.sin(start - (angle / 2));
-                // starty = Math.cos(start - (angle / 2));
+                    ctx.translate(500, 500);
+                    ctx.rotate(angle);
+                    ctx.translate(-500, -500);
+
+                    ctx.beginPath();
+                    ctx.strokeStyle = gray;
+                    var step = 55;
+                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 0), 35, 35, 10);
+                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 1), 35, 35, 10);
+                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 2), 35, 35, 10);
+                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 3), 35, 35, 10);
+                    ctx.stroke();
+
+                    ctx.beginPath();
+                    ctx.fillStyle = darkGray;
+                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 0), 35, 35, 10);
+                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 3), 35, 35, 10);
+                    ctx.fill();
+                }
 
                 ctx.translate(500, 500);
-                ctx.rotate(angle);
+                ctx.rotate(-angle / 2);
+                ctx.translate(-500, -500);
+
+                for (let i = 0; i < 12; i++) {
+                    start = Math.PI - angle * i;
+                    startx = Math.sin(start - (angle / 2));
+                    starty = Math.cos(start - (angle / 2));
+
+                    ctx.beginPath();
+                    ctx.fillStyle = yellow;
+                    ctx.font = "40px Staatliches";
+                    ctx.fillText(i + 1, 485 + startx * 460, 515 + starty * 460);
+                    ctx.font = "20px Staatliches";
+                    ctx.fillText(i + 1, 495 + startx * 160, 505 + starty * 160);
+                    ctx.fill();
+                }
+
+                ctx.translate(500, 500);
+                ctx.rotate(angle * (visible + 2));
                 ctx.translate(-500, -500);
 
                 ctx.beginPath();
-                ctx.strokeStyle = gray;
-                var step = 55;
-                ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 0), 35, 35, 10);
-                ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 1), 35, 35, 10);
-                ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 2), 35, 35, 10);
-                ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 3), 35, 35, 10);
-                ctx.stroke();
-                
-                ctx.beginPath();
-                ctx.fillStyle = darkGray;
-                ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 0), 35, 35, 10);
-                ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 3), 35, 35, 10);
+                ctx.fillStyle = darkblue;
+                ctx.arc(500, 500, 175, 0, Math.PI);
+                ctx.arc(500, 500, 140, Math.PI, Math.PI * 2);
                 ctx.fill();
-            }
-
-            ctx.translate(500, 500);
-            ctx.rotate(-angle / 2);
-            ctx.translate(-500, -500);
-
-            for (let i = 0; i < 12; i++) {
-                start = Math.PI - angle * i;
-                startx = Math.sin(start - (angle / 2));
-                starty = Math.cos(start - (angle / 2));
 
                 ctx.beginPath();
                 ctx.fillStyle = yellow;
-                ctx.font = "40px Staatliches";
-                ctx.fillText(i + 1, 485 + startx * 460, 515 + starty * 460);
+                ctx.arc(500, 500, 25, 0, 2 * Math.PI);
                 ctx.fill();
+
+                ctx.beginPath();
+                ctx.fillStyle = blue;
+                ctx.arc(500, 400, 15, 0, 2 * Math.PI);
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.fillStyle = yellow;
+                var path = new Path2D();
+                path.moveTo(332, 522);
+                path.lineTo(342, 505);
+                path.lineTo(352, 522);
+                ctx.fill(path);
+
+                ctx.translate(500, 500);
+                ctx.rotate(-angle * (visible + 2));
+                ctx.translate(-500, -500);
             }
 
-            ctx.beginPath();
-            ctx.fillStyle = yellow;
-            ctx.arc(500, 500, 25, 0, 2 * Math.PI);
-            ctx.fill();
+
+            drawBoard();
+
+            canvas.onclick = () => {
+                visible++;
+                drawBoard();
+            };
 
             var post = location.href.split('?')[1].split('&');
             var params = post.map((x) => x.split('='));
@@ -124,10 +165,6 @@
                 }
             });
 
-            window.onkeydown = (e) => {
-                if (e.key == "p")
-                    backend.send('{"msg": "ping"}');
-            }
         </script>
     </div>
 </body>
