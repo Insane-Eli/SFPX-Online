@@ -20,24 +20,25 @@
         <!-- <img src="images/logo.png" style="width: 50vw; padding: 0 10vw;" /> -->
         <!-- <h1>Game Started</h1> -->
 
-        <canvas style="aspect-ratio: 1/1; height: 100vh; position: absolute; top: 0; left: 0;" width="1000"
-            height="1000"></canvas>
+        <canvas style="aspect-ratio: 1/1; height: 100vh; position: absolute; top: 0; left: 0;" width="2000"
+            height="2000"></canvas>
 
         <script>
 
             const canvas = document.querySelector("canvas");
             const ctx = canvas.getContext("2d");
+            var hw = canvas.width / 2;
+            var hh = canvas.height / 2;
 
             var visible = 1;
 
             function drawBoard(selected) {
-                ctx.clearRect(0, 0, 1000, 1000);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 // var img = new Image();
                 // img.src = "images/board.jpeg";
                 // img.onload = function () {
-                //     ctx.drawImage(img, 0, -18, 1000, 1000);
-                // };
+                // ctx.drawImage(img, 0, -18 * hh / 500, canvas.width, canvas.height);
 
                 var blue = "rgb(80, 183, 249)";
                 var darkblue = "rgb(20, 20, 80)";
@@ -46,12 +47,13 @@
                 var darkGray = "rgb(60, 60, 60)";
 
                 ctx.strokeStyle = blue;
+                ctx.lineWidth = hh / 500;
                 ctx.beginPath();
-                ctx.arc(500, 500, 430, 0, 2 * Math.PI);
+                ctx.arc(hw, hh, hh * 0.86, 0, 2 * Math.PI);
                 ctx.stroke();
 
                 ctx.beginPath();
-                ctx.arc(500, 500, 380, 0, 2 * Math.PI);
+                ctx.arc(hw, hh, hh * 0.77, 0, 2 * Math.PI);
                 ctx.stroke();
 
                 var angle = ((2 * Math.PI) / 12);
@@ -62,56 +64,61 @@
                 for (let i = 0; i < 12; i++) {
                     ctx.strokeStyle = blue;
                     ctx.beginPath();
-                    ctx.moveTo(500 + startx * 430, 500 + starty * 430);
-                    ctx.lineTo(500, 500);
+                    ctx.moveTo(hw + startx * hh * 0.86, hh + starty * hh * 0.86);
+                    ctx.lineTo(hw, hh);
                     ctx.stroke();
 
-                    ctx.translate(500, 500);
+                    ctx.translate(hw, hh);
                     ctx.rotate(angle);
-                    ctx.translate(-500, -500);
+                    ctx.translate(-hw, -hh);
                 }
 
-                ctx.translate(500, 500);
+                ctx.translate(hw, hh);
                 ctx.rotate(angle / 2);
-                ctx.translate(-500, -500);
+                ctx.translate(-hw, -hh);
 
                 for (let i = 0; i < 12; i++) {
 
-                    ctx.translate(500, 500);
+                    ctx.translate(hw, hh);
                     ctx.rotate(angle);
-                    ctx.translate(-500, -500);
+                    ctx.translate(-hw, -hh);
+
+                    var step = hh * 0.12;
+                    var size = hh * 0.07;
+                    ctx.beginPath();
+                    ctx.fillStyle = darkGray;
+                    ctx.roundRect(hw + startx * -hh * 0.08, hh + starty * (hh * 0.86 - step * 0), size, size, size / 4);
+                    ctx.roundRect(hw + startx * -hh * 0.08, hh + starty * (hh * 0.86 - step * 3), size, size, size / 4);
+                    ctx.fill();
 
                     ctx.beginPath();
                     ctx.strokeStyle = gray;
-                    var step = 55;
-                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 0), 35, 35, 10);
-                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 1), 35, 35, 10);
-                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 2), 35, 35, 10);
-                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 3), 35, 35, 10);
+                    ctx.roundRect(hw + startx * -hh * 0.08, hh + starty * (hh * 0.86 - step * 0), size, size, size / 4);
+                    ctx.roundRect(hw + startx * -hh * 0.08, hh + starty * (hh * 0.86 - step * 1), size, size, size / 4);
+                    ctx.roundRect(hw + startx * -hh * 0.08, hh + starty * (hh * 0.86 - step * 2), size, size, size / 4);
+                    ctx.roundRect(hw + startx * -hh * 0.08, hh + starty * (hh * 0.86 - step * 3), size, size, size / 4);
                     ctx.stroke();
 
-                    ctx.beginPath();
-                    ctx.fillStyle = darkGray;
-                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 0), 35, 35, 10);
-                    ctx.roundRect(500 + startx * -38, 500 + starty * (420 - step * 3), 35, 35, 10);
-                    ctx.fill();
                 }
 
-                ctx.translate(500, 500);
+                ctx.translate(hw, hh);
                 ctx.rotate(-angle / 2);
-                ctx.translate(-500, -500);
+                ctx.translate(-hw, -hh);
 
                 for (let i = 0; i < 12; i++) {
                     start = Math.PI - angle * i;
                     startx = Math.sin(start - (angle / 2));
                     starty = Math.cos(start - (angle / 2));
 
+                    ctx.textBaseline = "middle";
+                    ctx.textAlign = "center";
+
                     ctx.beginPath();
                     ctx.fillStyle = yellow;
-                    ctx.font = "40px Staatliches";
-                    ctx.fillText(i + 1, 485 + startx * 460, 515 + starty * 460);
-                    ctx.font = "20px Staatliches";
-                    ctx.fillText(i + 1, 495 + startx * 160, 505 + starty * 160);
+                    ctx.font = hh / 20 + "px Staatliches";
+                    ctx.fillText(i + 1, hw + startx * hh * 0.9, hh + starty * hh * 0.9);
+                    ctx.font = hh / 25 + "px Staatliches";
+                    ctx.fillText(i + 1, hw + startx * hh * 0.31, hh + starty * hh * 0.31);
                     ctx.fill();
                 }
 
@@ -119,7 +126,7 @@
                 if (selected !== null) {
                     ctx.beginPath();
                     ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
-                    ctx.arc(500, 500, 430, selected * angle, selected * angle + angle);
+                    ctx.arc(hw, hh, hh * 0.86, selected * angle, selected * angle + angle);
                     ctx.fill();
 
                     ctx.beginPath();
@@ -128,50 +135,52 @@
                     startx = Math.sin(start - (angle / 2));
                     starty = Math.cos(start - (angle / 2));
 
-                    ctx.moveTo(startx * 430 + 500, -starty * 430 + 500);
+                    ctx.moveTo(startx * hh * 0.86 + hw, -starty * hh * 0.86 + hh);
 
                     start = angle * (selected + 4.5);
                     startx = Math.sin(start - (angle / 2));
                     starty = Math.cos(start - (angle / 2));
 
-                    ctx.lineTo(startx * 430 + 500, -starty * 430 + 500);
+                    ctx.lineTo(startx * hh * 0.86 + hw, -starty * hh * 0.86 + hh);
 
-                    ctx.lineTo(500, 500);
+                    ctx.lineTo(hw, hh);
                     ctx.fill();
                 }
 
                 //draw center piece
 
-                ctx.translate(500, 500);
+                ctx.translate(hw, hh);
                 ctx.rotate(angle * (visible + 2));
-                ctx.translate(-500, -500);
+                ctx.translate(-hw, -hh);
 
                 ctx.beginPath();
                 ctx.fillStyle = darkblue;
-                ctx.arc(500, 500, 175, 0, Math.PI);
-                ctx.arc(500, 500, 140, Math.PI, Math.PI * 2);
+                ctx.arc(hw, hh, hh * 0.34, 0, Math.PI);
+                ctx.arc(hw, hh, hh * 0.27, Math.PI, Math.PI * 2);
                 ctx.fill();
 
                 ctx.beginPath();
                 ctx.fillStyle = yellow;
-                ctx.arc(500, 500, 25, 0, 2 * Math.PI);
+                ctx.arc(hw, hh, hh * 0.05, 0, 2 * Math.PI);
                 ctx.fill();
 
                 ctx.beginPath();
                 ctx.fillStyle = blue;
-                ctx.arc(500, 390, 15, 0, 2 * Math.PI);
+                ctx.arc(hw, hh * 0.78, hh * 0.025, 0, 2 * Math.PI);
                 ctx.fill();
 
                 ctx.beginPath();
                 ctx.fillStyle = yellow;
-                ctx.moveTo(332, 522);
-                ctx.lineTo(342, 505);
-                ctx.lineTo(352, 522);
+                ctx.moveTo(hh * 0.68, hh * 1.045);
+                ctx.lineTo(hh * 0.70, hh * 1.010);
+                ctx.lineTo(hh * 0.72, hh * 1.045);
                 ctx.fill();
 
-                ctx.translate(500, 500);
+                ctx.translate(hw, hh);
                 ctx.rotate(-angle * (visible + 2));
-                ctx.translate(-500, -500);
+                ctx.translate(-hw, -hh);
+
+                // };
             }
 
             drawBoard();
@@ -183,16 +192,16 @@
 
             canvas.onmousemove = (event) => {
                 var rect = canvas.getBoundingClientRect();
-                var x = (event.clientX - rect.left) * (1000 / rect.width);
-                var y = (event.clientY - rect.top) * (1000 / rect.height);
+                var x = (event.clientX - rect.left) * (canvas.width / rect.width);
+                var y = (event.clientY - rect.top) * (canvas.height / rect.height);
 
-                var a = x - 500;
-                var b = y - 500;
+                var a = x - hw;
+                var b = y - hh;
                 var c = Math.sqrt(a * a + b * b);
 
-                var angle = Math.atan2(y - 500, x - 500) + Math.PI;
+                var angle = Math.atan2(y - hh, x - hw) + Math.PI;
                 var sector = Math.floor((angle / (Math.PI * 2)) * 12) + 6;
-                if (c < 430) {
+                if (c < hh * 0.86) {
                     drawBoard(sector);
                 } else {
                     drawBoard();
