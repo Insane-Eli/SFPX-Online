@@ -78,9 +78,15 @@
                     ctx.beginPath();
                     ctx.fillStyle = gray;
 
+                    // ctx.shadowColor = gray;
+                    // ctx.shadowBlur = 10;
+
                     ctx.arc(star[0], star[1], star[2], 0, 2 * Math.PI);
 
                     ctx.fill();
+
+                    // ctx.shadowColor = "rgba(0, 0, 0, 0)";
+                    // ctx.shadowBlur = 0;
                 });
 
                 ctx.strokeStyle = blue;
@@ -212,11 +218,20 @@
                 ctx.arc(hw, hh, hh * 0.27, Math.PI, Math.PI * 2);
                 ctx.fill();
 
+                //sun
+
+                ctx.shadowColor = "orange";
+                ctx.shadowBlur = 100;
+
                 ctx.beginPath();
                 ctx.fillStyle = yellow;
                 ctx.arc(hw, hh, hh * 0.05, 0, 2 * Math.PI);
                 ctx.fill();
 
+                ctx.shadowColor = "rgba(0, 0, 0, 0)";
+                ctx.shadowBlur = 0;
+
+                //earth
                 ctx.beginPath();
                 ctx.fillStyle = blue;
                 ctx.arc(hw, hh * 0.78, hh * 0.025, 0, 2 * Math.PI);
