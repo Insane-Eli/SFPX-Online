@@ -34,6 +34,30 @@
             var sector = 0;
             var selected = 0;
 
+            var blue = "rgb(80, 183, 249)";
+            var darkblue = "rgb(20, 20, 80)";
+            var yellow = "rgb(255, 255, 0)";
+            var gray = "rgb(128, 128, 128)";
+            var darkGray = "rgb(60, 60, 60)";
+            var spacecolor = "rgb(20, 20, 25)";
+
+            ctx.lineWidth = hh / 500;
+
+            var stars = [];
+
+            for (let i = 0; i < 1000; i++) {
+                var x = Math.random() * canvas.width;
+                var y = Math.random() * canvas.height;
+                var a = x - hw;
+                var b = y - hh;
+                var c = Math.sqrt(a * a + b * b);
+
+                var s = Math.random() * hh * 0.01;
+
+                if (c < hh * 0.86)
+                    stars.push([x, y, s]);
+            }
+
             function drawBoard() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -42,21 +66,27 @@
                 // img.onload = function () {
                 // ctx.drawImage(img, 0, -18 * hh / 500, canvas.width, canvas.height);
 
-                var blue = "rgb(80, 183, 249)";
-                var darkblue = "rgb(20, 20, 80)";
-                var yellow = "rgb(255, 255, 0)";
-                var gray = "rgb(128, 128, 128)";
-                var darkGray = "rgb(60, 60, 60)";
+
+                ctx.beginPath();
+                ctx.fillStyle = spacecolor;
+                ctx.arc(hw, hh, hh * 0.86, 0, 2 * Math.PI);
+                ctx.fill();
+
+                //draw stars
+                stars.forEach(star => {
+
+                    ctx.beginPath();
+                    ctx.fillStyle = gray;
+
+                    ctx.arc(star[0], star[1], star[2], 0, 2 * Math.PI);
+
+                    ctx.fill();
+                });
 
                 ctx.strokeStyle = blue;
-                ctx.lineWidth = hh / 500;
                 ctx.beginPath();
                 ctx.arc(hw, hh, hh * 0.86, 0, 2 * Math.PI);
                 ctx.stroke();
-                ctx.beginPath();
-                ctx.fillStyle = "rgb(20, 20, 25)";
-                ctx.arc(hw, hh, hh * 0.86, 0, 2 * Math.PI);
-                ctx.fill();
 
                 ctx.beginPath();
                 ctx.arc(hw, hh, hh * 0.77, 0, 2 * Math.PI);
