@@ -31,8 +31,10 @@
             var hh = canvas.height / 2;
 
             var visible = 1;
+            var sector = 0;
+            var selected = 0;
 
-            function drawBoard(selected) {
+            function drawBoard() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 // var img = new Image();
@@ -51,6 +53,10 @@
                 ctx.beginPath();
                 ctx.arc(hw, hh, hh * 0.86, 0, 2 * Math.PI);
                 ctx.stroke();
+                ctx.beginPath();
+                ctx.fillStyle = "rgb(20, 20, 25)";
+                ctx.arc(hw, hh, hh * 0.86, 0, 2 * Math.PI);
+                ctx.fill();
 
                 ctx.beginPath();
                 ctx.arc(hw, hh, hh * 0.77, 0, 2 * Math.PI);
@@ -123,28 +129,45 @@
                 }
 
                 // highlight selected sector
-                if (selected !== null) {
-                    ctx.beginPath();
-                    ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
-                    ctx.arc(hw, hh, hh * 0.86, selected * angle, selected * angle + angle);
-                    ctx.fill();
 
-                    ctx.beginPath();
+                // console.log(sector, selected);
 
-                    start = angle * (selected + 3.5);
-                    startx = Math.sin(start - (angle / 2));
-                    starty = Math.cos(start - (angle / 2));
+                if (sector > 0) {
 
-                    ctx.moveTo(startx * hh * 0.86 + hw, -starty * hh * 0.86 + hh);
+                    if (selected > 0) {
+                        var start = selected > sector ? sector : selected;
+                        var end = selected > sector ? selected : sector;
+                    } else {
+                        var start = sector;
+                        var end = sector;
+                    }
 
-                    start = angle * (selected + 4.5);
-                    startx = Math.sin(start - (angle / 2));
-                    starty = Math.cos(start - (angle / 2));
 
-                    ctx.lineTo(startx * hh * 0.86 + hw, -starty * hh * 0.86 + hh);
+                    for (var i = start - 4; i <= end - 4; i++) {
+                        // console.log(start, end, i);
 
-                    ctx.lineTo(hw, hh);
-                    ctx.fill();
+                        ctx.beginPath();
+                        ctx.fillStyle = "rgba(255, 255, 255, 0.3)";
+                        ctx.arc(hw, hh, hh * 0.86, i * angle, i * angle + angle);
+                        ctx.fill();
+
+                        ctx.beginPath();
+
+                        start = angle * (i + 3.5);
+                        startx = Math.sin(start - (angle / 2));
+                        starty = Math.cos(start - (angle / 2));
+
+                        ctx.moveTo(startx * hh * 0.86 + hw, -starty * hh * 0.86 + hh);
+
+                        start = angle * (i + 4.5);
+                        startx = Math.sin(start - (angle / 2));
+                        starty = Math.cos(start - (angle / 2));
+
+                        ctx.lineTo(startx * hh * 0.86 + hw, -starty * hh * 0.86 + hh);
+
+                        ctx.lineTo(hw, hh);
+                        ctx.fill();
+                    }
                 }
 
                 //draw center piece
@@ -186,6 +209,11 @@
             drawBoard();
 
             canvas.onclick = () => {
+
+                if (sector > 0) {
+                    selected = sector;
+                }
+
                 visible++;
                 drawBoard();
             };
@@ -200,14 +228,15 @@
                 var c = Math.sqrt(a * a + b * b);
 
                 var angle = Math.atan2(y - hh, x - hw) + Math.PI;
-                var sector = Math.floor((angle / (Math.PI * 2)) * 12) + 6;
-                if (c < hh * 0.86) {
-                    drawBoard(sector);
-                } else {
-                    drawBoard();
-                }
+                sector = (Math.floor(((angle / (Math.PI * 2)) * 12)) + 9) % 12 + 1;
+
+                if (c > hh * 0.86)
+                    sector = 0;
+
+                drawBoard();
 
             }
+
 
             var post = location.href.split('?')[1].split('&');
             var params = post.map((x) => x.split('='));
