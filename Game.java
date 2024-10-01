@@ -236,7 +236,7 @@ public class Game {
                 if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
                         && xLoc - 1 == Function.findIndex(sector, 5)) {
                     System.out.println("You have found Planet X");
-                    locVal[0][2] += (locVal[3][0]-locVal[i][0])*2;
+                    locVal[0][2] += (locVal[3][0] - locVal[i][0]) * 2;
                 } else {
                     System.out.println("You have failed to find Planet X");
                 }
