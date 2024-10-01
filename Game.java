@@ -21,6 +21,11 @@ public class Game {
         int theoAmount = 0;
         int finderOfX = -1;
         int theoryObject;
+        int xLoc;
+        int preXLoc;
+        int preObj;
+        int postXLoc;
+        int postObj;
         String theoryLocation;
         int[][] locVal = new int[4][3];
         for (int i = 0; i < 4; i++) {
@@ -70,19 +75,19 @@ public class Game {
                     break;
                 case "x":
                     System.out.println("Enter Location of Planet X");
-                    int xLoc = input.nextInt();
-                    int preXLoc = xLoc - 1;
+                    xLoc = input.nextInt();
+                    preXLoc = xLoc - 1;
                     if (preXLoc == 0) {
                         preXLoc += 12;
                     }
                     System.out.println("Enter object in sector " + preXLoc);
-                    int preObj = input.nextInt();
-                    int postXLoc = (xLoc + 1) % 12;
+                    preObj = input.nextInt();
+                    postXLoc = (xLoc + 1) % 12;
                     if (postXLoc == 0) {
                         postXLoc += 12;
                     }
                     System.out.println("Enter object in sector " + postXLoc);
-                    int postObj = input.nextInt();
+                    postObj = input.nextInt();
                     temp = input.nextLine();
                     if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
                             && xLoc - 1 == Function.findIndex(sector, 5)) {
@@ -200,7 +205,7 @@ public class Game {
         for (int i = 0; i < 3; i++) {
             System.out.println("Final Selection, Theory or X, Player" + locVal[i][1]);
             if (input.nextLine().toLowerCase() == "theory") {
-                for (int j = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
                     System.out.println("Enter Theory Location");
                     theoryLocation = input.nextLine();
                     System.out.println("Enter Theory Object");
@@ -213,7 +218,28 @@ public class Game {
                     }
                 }
             } else {
-                
+                System.out.println("Enter Location of Planet X");
+                xLoc = input.nextInt();
+                preXLoc = xLoc - 1;
+                if (preXLoc == 0) {
+                    preXLoc += 12;
+                }
+                System.out.println("Enter object in sector " + preXLoc);
+                preObj = input.nextInt();
+                postXLoc = (xLoc + 1) % 12;
+                if (postXLoc == 0) {
+                    postXLoc += 12;
+                }
+                System.out.println("Enter object in sector " + postXLoc);
+                postObj = input.nextInt();
+                temp = input.nextLine();
+                if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
+                        && xLoc - 1 == Function.findIndex(sector, 5)) {
+                    System.out.println("You have found Planet X");
+                    locVal[0][2] += (locVal[3][0]-locVal[i][0])*2;
+                } else {
+                    System.out.println("You have failed to find Planet X");
+                }
             }
         }
         for (int i = 0; i < 4; i++) {
