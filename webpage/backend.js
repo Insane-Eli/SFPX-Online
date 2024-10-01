@@ -1,7 +1,7 @@
 class PlanetXBackend {
 
     constructor(port) {
-        this.serverIP = location.href.split("/")[2];
+        this.serverIP = location.href.split("/")[2].split(":")[0];
         this.port = port;
         this.ws = null;
         if (this.port) {
