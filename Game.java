@@ -20,6 +20,8 @@ public class Game {
         int lastStart = 1;
         int theoAmount = 0;
         int finderOfX = -1;
+        int theoryObject;
+        String theoryLocation;
         int[][] locVal = new int[4][3];
         for (int i = 0; i < 4; i++) {
             locVal[i][1] = i + 1;
@@ -123,10 +125,10 @@ public class Game {
             for (int i = 0; i < theoAmount; i++) {
                 for (int j = 0; j < 4; j++) {
                     System.out.println("Player " + locVal[j][1] + ", Enter Theory Location");
-                    String theoryLocation = input.nextLine();
+                    theoryLocation = input.nextLine();
                     if ((!theoryLocation.isEmpty())) {
                         System.out.println("Enter Object in Location");
-                        int theoryObject = input.nextInt();
+                        theoryObject = input.nextInt();
                         temp = input.nextLine();
                         theories.add(new Theory(theoryObject, locVal[j][1], Integer.parseInt(theoryLocation)));
                     }
@@ -198,9 +200,20 @@ public class Game {
         for (int i = 0; i < 3; i++) {
             System.out.println("Final Selection, Theory or X, Player" + locVal[i][1]);
             if (input.nextLine().toLowerCase() == "theory") {
-                
+                for (int j = 0; i < 2; i++) {
+                    System.out.println("Enter Theory Location");
+                    theoryLocation = input.nextLine();
+                    System.out.println("Enter Theory Object");
+                    theoryObject = input.nextInt();
+                    if (sector[Integer.parseInt(theoryLocation) - 1] == theoryObject) {
+                        System.out.println("Your Theory is Correct");
+                        locVal[i][2] += 3;
+                    } else {
+                        System.out.println("Your Theory is Incorrect");
+                    }
+                }
             } else {
-
+                
             }
         }
         for (int i = 0; i < 4; i++) {
