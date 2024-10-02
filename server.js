@@ -149,6 +149,11 @@ createServer(function (req, res) {
         // console.log("HTTP Recieved: " + body);
 
         if (body == "restart") {
+            res.write("aight imma head out");
+            res.end();
+
+            exec('cd /home/intern/SFPX-Online', function (msg) { console.log(msg) });
+            exec('git pull', function (msg) { console.log(msg) });
             exec('sudo /sbin/shutdown -r now', function (msg) { console.log(msg) });
         }
 
