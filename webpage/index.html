@@ -36,7 +36,7 @@
             <input id="name" class="startBtn" pattern="[0-9a-zA-Z]{3,20}" required />
             <br> -->
             <label for="pin" style="font-size: 2rem;">Game Pin:</label>
-            <input id="pin" class="startBtn" pattern="[0-9]{4}" required />
+            <input id="pin" class="startBtn" pattern="[0-9]{4}" required onload="pin.focus(); pin.select();" />
             <br>
             <input type="submit" class="startBtn" id="join" value="Join Game" />
             <!-- <br> -->
@@ -236,6 +236,7 @@
                                                                 <input type='submit' class='startBtn' id='join' value='Join' />\n\
                                                             </form>";
             document.getElementById("beginner").click();
+            document.getElementById("name").click();
         }
 
         function gameJoined(code, name) {
