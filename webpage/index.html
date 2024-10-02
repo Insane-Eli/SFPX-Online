@@ -78,6 +78,7 @@
     </div>
 
     <script>
+
         function toggleOptions() {
             const optionsTab = document.getElementById('optionsTab');
             optionsTab.classList.toggle('open');
@@ -143,6 +144,9 @@
         const pin = document.getElementById("pin");
         const username = document.getElementById("name");
         const output = document.getElementById("output");
+
+        pin.focus();
+        pin.select();
 
         var backend = new PlanetXBackend();
         backend.onRecieve = (data) => {
@@ -236,6 +240,8 @@
                                                                 <input type='submit' class='startBtn' id='join' value='Join' />\n\
                                                             </form>";
             document.getElementById("beginner").click();
+            document.getElementById("name").focus();
+            document.getElementById("name").select();
         }
 
         function gameJoined(code, name) {
