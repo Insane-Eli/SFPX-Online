@@ -126,9 +126,8 @@ console.log("\
 // console.log("Starting Webpage");
 
 var sudo = false;
-// var uid = parseInt(process.env.SUDO_UID);
 var uid = process.env.SUDO_UID;
-console.log(process.env.SUDO_UID);
+console.log("Sudo:", uid);
 if (uid) sudo = true;
 
 connect()
