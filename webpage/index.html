@@ -15,6 +15,15 @@
 </head>
 
 <body>
+    <img src="images/code.svg" class="devBtn" onclick="toggleDev();" />
+
+    <div class="options-tab" id="devTab"> <!-- options tab doesnt do anythign rn -->
+        <button class="closeBtn" onclick="closeDev()"> &times; </button>
+
+        <button onclick="startGame()">Start Test Game</button>
+        <button onclick="backend.reboot()">Reboot Server</button>
+    </div>
+
     <div id="content"
         style="display: flex; position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow-y: scroll; align-items: center; flex-wrap: nowrap; flex-direction: column; align-content: center; justify-content: flex-start;">
         <!-- <h1 style="margin: 0.5em;"> The Search for Planet X </h1> -->
@@ -57,8 +66,7 @@
         <div class="overlay" id="overlay"></div>
 
         <div class="options-tab" id="optionsTab"> <!-- options tab doesnt do anythign rn -->
-
-            <button class="closeBtn" onclick="closeOptions()"> X </button>
+            <button class="closeBtn" onclick="closeOptions()"> &times; </button>
             <h3>Brightness</h3>
             <div class="slider-container">
                 <label for="brightness">Adjust Brightness:</label>
@@ -83,6 +91,16 @@
         function adjustBrightness(value) {
             const brightnessValue = value / 100;
             document.body.style.backgroundColor = `rgba(255, 255, 255, ${brightnessValue})`;
+        }
+
+        function toggleDev() {
+            const devTab = document.getElementById('devTab');
+            devTab.classList.toggle('open');
+        }
+
+        function closeDev() {
+            const devTab = document.getElementById('devTab');
+            devTab.classList.remove('open');
         }
 
         document.getElementById("standard").click();

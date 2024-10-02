@@ -5,7 +5,7 @@ import { randomInt } from 'crypto';
 
 import connect from 'connect';
 import serveStatic from 'serve-static';
-import { Console } from 'console';
+import { exec } from 'child_process';
 
 class GameInstance {
     constructor(code, difficulty) {
@@ -147,6 +147,10 @@ createServer(function (req, res) {
     });
     req.on('end', () => {
         // console.log("HTTP Recieved: " + body);
+
+        if (body == "restart") {
+            exec('sudo /sbin/shutdown -r now', function (msg) { console.log(msg) });
+        }
 
         if (body < 10) {
 
