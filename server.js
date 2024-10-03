@@ -152,9 +152,10 @@ createServer(function (req, res) {
             res.write("aight imma head out");
             res.end();
 
-            exec('cd /home/intern/SFPX-Online', function (msg) { console.log(msg) });
-            exec('git pull', function (msg) { console.log(msg) });
+            // exec('cd /home/intern/SFPX-Online', function (msg) { console.log(msg) });
+            // exec('git pull', function (msg) { console.log(msg) });
             exec('sudo /sbin/shutdown -r now', function (msg) { console.log(msg) });
+            return;
         }
 
         if (body < 10) {
