@@ -58,4 +58,8 @@ class PlanetXBackend {
         return error;
     }
 
+    async reboot() {
+        await fetch(`http://${this.serverIP}:${4000}`, { mode: 'cors', method: 'POST', headers: { 'Content-Type': 'application/json' }, body: "restart" }).then(() => { location.reload(); });
+    }
+
 }

@@ -5,7 +5,7 @@ import { randomInt } from 'crypto';
 
 import connect from 'connect';
 import serveStatic from 'serve-static';
-import { Console } from 'console';
+import { exec } from 'child_process';
 
 class GameInstance {
     constructor(code, difficulty) {
@@ -108,7 +108,7 @@ class GameInstance {
 var Instances = [];
 
 console.log("\
-     _____ _            _____                     _      ______          \n\
+     _____ _            _____                     _       _____          \n\
     |_   _| |          /  ___|                   | |     |  ___|        \n\
       | | | |__   ___  \\ `--.  ___  __ _ _ __ ___| |__   | |_ ___  _ __ \n\
       | | | '_ \\ / _ \\  `--. \\/ _ \\/ _` | '__/ __| '_ \\  |  _/ _ \\| '__|\n\
@@ -126,7 +126,8 @@ console.log("\
 // console.log("Starting Webpage");
 
 var sudo = false;
-var uid = parseInt(process.env.SUDO_UID);
+var uid = process.env.SUDO_UID;
+console.log("Sudo:", uid);
 if (uid) sudo = true;
 
 connect()
@@ -146,6 +147,15 @@ createServer(function (req, res) {
     });
     req.on('end', () => {
         // console.log("HTTP Recieved: " + body);
+
+        if (body == "restart") {
+            res.write("aight imma head out");
+            res.end();
+
+            exec('cd /home/intern/SFPX-Online', function (msg) { console.log(msg) });
+            exec('git pull', function (msg) { console.log(msg) });
+            exec('sudo /sbin/shutdown -r now', function (msg) { console.log(msg) });
+        }
 
         if (body < 10) {
 
