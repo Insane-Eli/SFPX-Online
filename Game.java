@@ -25,6 +25,7 @@ public class Game {
         int postXLoc;
         int postObj;
         String theoryLocation;
+        String[] research = {"The dwarf planet is not within 2 sectors of a comet.","All the gas clouds are in a band of 4 sectors or less.","At least one asteroid is adjacent to a comet.","The dwarf planet is adjacent to an asteroid.","At least one gas cloud is adjacent to the dwarf planet.","At least one gas cloud is directly opposite an asteroid."};
         int[][] locVal = new int[4][3];
         for (int i = 0; i < 4; i++) {
             locVal[i][1] = i + 1;
@@ -63,6 +64,9 @@ public class Game {
                     System.out.println("Your survey has found " + amount);
                     break;
                 case "research":
+                    System.out.println("Choose Research");
+                    System.out.println(research[input.nextInt()]);
+                    input.nextLine();
                     locVal[0][0] += 1;
                     break;
                 case "target":
