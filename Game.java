@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -8,10 +7,8 @@ public class Game {
     public static void main(String[] args) {
 
         Scanner input = new Scanner(System.in);
-        Random rand = new Random();
         ArrayList<Theory> theories = new ArrayList<>();
 
-        String temp;
         boolean xFound = false;
         boolean hasCon = false;
         boolean correct = false;
@@ -21,21 +18,24 @@ public class Game {
         int theoAmount = 0;
         int finderOfX = -1;
         int theoryObject;
-        int xLoc;
+        int xLoc = 8;
+        int xPrediction;
         int preXLoc;
         int preObj;
         int postXLoc;
         int postObj;
         String theoryLocation;
+        String[] research = {"The dwarf planet is not within 2 sectors of a comet.","All the gas clouds are in a band of 4 sectors or less.","At least one asteroid is adjacent to a comet.","The dwarf planet is adjacent to an asteroid.","At least one gas cloud is adjacent to the dwarf planet.","At least one gas cloud is directly opposite an asteroid."};
         int[][] locVal = new int[4][3];
         for (int i = 0; i < 4; i++) {
             locVal[i][1] = i + 1;
             locVal[i][0] = 1;
         }
-        int[] sector = new int[12];
-        for (int i = 0; i < 12; i++) {
-            sector[i] = rand.nextInt(6);
-        }
+        int [] sector = {1, 2, 3, 4, 4, 3, 0, 4, 1, 1, 0, 1};
+        //int[] sector = new int[12];
+        /*for (int i = 0; i < 12; i++) {
+            sector[i] = 4;
+        } */
 
         while (!xFound) {
 
@@ -48,7 +48,7 @@ public class Game {
                     int sStart = input.nextInt();
                     System.out.println("End Where");
                     int sEnd = input.nextInt();
-                    temp = input.nextLine();
+                    input.nextLine();
                     int range = 0;
                     int tsStart = sStart;
                     while (tsStart != (sEnd + 1) % 12) {
@@ -64,33 +64,36 @@ public class Game {
                     System.out.println("Your survey has found " + amount);
                     break;
                 case "research":
+                    System.out.println("Choose Research");
+                    System.out.println(research[input.nextInt()]);
+                    input.nextLine();
                     locVal[0][0] += 1;
                     break;
                 case "target":
                     System.out.println("Which Sector?");
                     int targSec = input.nextInt();
-                    temp = input.nextLine();
+                    input.nextLine();
                     System.out.println("There is a " + sector[targSec - 1] + " in " + targSec);
                     locVal[0][0] += 4;
                     break;
                 case "x":
                     System.out.println("Enter Location of Planet X");
-                    xLoc = input.nextInt();
-                    preXLoc = xLoc - 1;
+                    xPrediction = input.nextInt();
+                    preXLoc = xPrediction - 1;
                     if (preXLoc == 0) {
                         preXLoc += 12;
                     }
                     System.out.println("Enter object in sector " + preXLoc);
                     preObj = input.nextInt();
-                    postXLoc = (xLoc + 1) % 12;
+                    postXLoc = (xPrediction + 1) % 12;
                     if (postXLoc == 0) {
                         postXLoc += 12;
                     }
                     System.out.println("Enter object in sector " + postXLoc);
                     postObj = input.nextInt();
-                    temp = input.nextLine();
+                    input.nextLine();
                     if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
-                            && xLoc - 1 == Function.findIndex(sector, 5)) {
+                            && xPrediction == xLoc) {
                         System.out.println("You have found Planet X");
                         finderOfX = locVal[0][1];
                         locVal[0][2] += 10;
@@ -134,7 +137,7 @@ public class Game {
                     if ((!theoryLocation.isEmpty())) {
                         System.out.println("Enter Object in Location");
                         theoryObject = input.nextInt();
-                        temp = input.nextLine();
+                        input.nextLine();
                         theories.add(new Theory(theoryObject, locVal[j][1], Integer.parseInt(theoryLocation)));
                     }
                 }
@@ -184,8 +187,7 @@ public class Game {
             theoAmount = 0;
 
             if (locVal[0][0] > 12 && !hasCon) {
-                int reveal = rand.nextInt(12);
-                System.out.println("Conference: There is a " + sector[reveal] + " in Sector " + (reveal + 1));
+                System.out.println("Planet X is not within 3 sectors of the dwarf planet.");
                 hasCon = true;
             }
         }
@@ -232,7 +234,7 @@ public class Game {
                 }
                 System.out.println("Enter object in sector " + postXLoc);
                 postObj = input.nextInt();
-                temp = input.nextLine();
+                input.nextLine();
                 if (preObj == sector[preXLoc - 1] && postObj == sector[postXLoc - 1]
                         && xLoc - 1 == Function.findIndex(sector, 5)) {
                     System.out.println("You have found Planet X");
