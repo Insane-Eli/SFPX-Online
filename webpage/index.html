@@ -78,6 +78,7 @@
     </div>
 
     <script>
+
         function toggleOptions() {
             const optionsTab = document.getElementById('optionsTab');
             optionsTab.classList.toggle('open');
@@ -143,6 +144,9 @@
         const pin = document.getElementById("pin");
         const username = document.getElementById("name");
         const output = document.getElementById("output");
+
+        pin.focus();
+        pin.select();
 
         var backend = new PlanetXBackend();
         backend.onRecieve = (data) => {
@@ -215,6 +219,7 @@
             // Update HTML for New Game username input
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share the code with your friends to play together!</h2>\n\
+                                                            <span style='cursor: pointer; font-size: 2rem;' onclick='copyLink();'><img src='./images/copy.svg' style='width: 0.8em; margin-right: 0.3em; filter: invert(1)' />Copy Link</span>\n\
                                                             <br>\n\
                                                             <form id='joinForm' style='width: 70vw;'\n\
                                                                 onsubmit='backend.joinGame(" + code + ", document.getElementById(\"name\").value.toUpperCase(), getPlayerDifficulty()); gameJoined(" + code + ", document.getElementById(\"name\").value.toUpperCase()); return false;'>\n\
@@ -236,13 +241,16 @@
                                                                 <input type='submit' class='startBtn' id='join' value='Join' />\n\
                                                             </form>";
             document.getElementById("beginner").click();
-            document.getElementById("name").click();
+            document.getElementById("name").focus();
+            document.getElementById("name").select();
         }
 
         function gameJoined(code, name) {
             // Update HTML for Joined Game
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share the code with your friends to play together!</h2>\n\
+                                                            <span style='cursor: pointer; font-size: 2rem;' onclick='copyLink();'><img src='./images/copy.svg' style='width: 0.8em; margin-right: 0.3em; filter: invert(1)' />Copy Link</span>\n\
+                                                            <br>\n\
                                                             <label for='ready' style='font-size: 2rem;'>I'm Ready\n\
                                                                 <input id='ready' type='checkbox' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":${this.checked}}`);'/>\n\
                                                             </label>\n\
@@ -253,10 +261,23 @@
             document.title = code + " | The Search for Planet X";
         }
 
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href.split('?')[0] + "?pin=" + code);
+        }
+
         function startGame(code) {
             document.getElementById("content").style.overflow = "hidden";
             document.getElementById("content").innerHTML = "<iframe id='game' src='game.html?port=" + backend.port + "' style='position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0'></iframe>";
         };
+
+        if (location.href.split("?")[1]) {
+            var params = location.href.split("?")[1].split("&");
+            for (var i = 0; i < params.length; i++) {
+                if (params[i].split("=")[0] == "pin") {
+                    gameJoining(params[i].split("=")[1]);
+                }
+            }
+        }
 
     </script>
 </body>
