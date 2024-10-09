@@ -249,16 +249,29 @@
             // Update HTML for Joined Game
             document.getElementById("content").innerHTML = "<h1>Game Code: " + code + "</h1>\n\
                                                             <h2>Share the code with your friends to play together!</h2>\n\
-                                                            <span style='cursor: pointer; font-size: 2rem;' onclick='copyLink();'><img src='./images/copy.svg' style='width: 0.8em; margin-right: 0.3em; filter: invert(1)' />Copy Link</span>\n\
+                                                            <span style='cursor: pointer; font-size: 2rem; user-select: none;' onclick='copyLink();'><img src='./images/copy.svg' style='width: 0.8em; margin-right: 0.3em; filter: invert(1)' />Copy Link</span>\n\
                                                             <br>\n\
-                                                            <label for='ready' style='font-size: 2rem;'>I'm Ready\n\
+                                                            <!--label for='ready' style='font-size: 2rem;'>I'm Ready\n\
                                                                 <input id='ready' type='checkbox' onchange='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":${this.checked}}`);'/>\n\
-                                                            </label>\n\
+                                                            </label-->\n\
+                                                            <label id='ready' style='font-size: 2rem; border: 1px solid white; border-radius: 10px; padding: 0 1vh 0 1vh; cursor: pointer; background-color: rgba(255, 0, 0, 0.5); user-select: none;' onclick='ready();'>Ready</label>\n\
                                                             <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\
                                                             <ul id='playerList'></ul>\n\
                                                             <button id='startBtn' class='startBtn' disabled onclick='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"start\"}`);'>Start Game</button>";
 
             document.title = code + " | The Search for Planet X";
+        }
+
+        function ready() {
+            if (document.getElementById("ready").style.backgroundColor == "rgba(255, 0, 0, 0.5)") {
+                backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":true}`);
+                document.getElementById("ready").style.backgroundColor = "rgba(0, 255, 0, 0.5)";
+            } else if (document.getElementById("ready").style.backgroundColor == "rgba(0, 255, 0, 0.5)") {
+                backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"ready\", \"value\":false}`);
+                document.getElementById("ready").style.backgroundColor = "rgba(255, 0, 0, 0.5)";
+            } else {
+                alert("Something went wrong, please reload the page.");
+            }
         }
 
         function copyLink() {
