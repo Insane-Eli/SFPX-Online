@@ -1,5 +1,6 @@
 import json
 import math
+import time
 import fitz  # PyMuPDF for PDF image extraction
 import imagehash
 from PIL import Image
@@ -130,17 +131,80 @@ def get_text_from_pdf(pdf_path):
     pdf_document.close()
     return text
 
-def get_research_from_pdf(pdf_path):
+def get_research_from_pdf(text):
     """Extract research from a PDF and return it as a string."""
     
-    research = []
-    text = get_text_from_pdf(pdf_path)
-    temp = text.split(":")
+    research = {"A":{}, "B":{}, "C":{}, "D":{}, "E":{}, "F":{}, "X1":{}}
+    temp = []
+    # text = get_text_from_pdf(pdf_path)
+    text = text.split(":")
 
-    for i in range(1, 6):
-        research.append(temp[i][:-1].replace("\n", "").strip())
+    pdf = pdf_path.replace(".pdf", "").replace("files/", "")
+
+    for i in range(1, 8):
+        temp.append(text[i][:-1].replace("\n", "").strip())
+
+    research["A"]["title"] = temp[0]
+    research["B"]["title"] = temp[1]
+    research["C"]["title"] = temp[2]
+    research["D"]["title"] = temp[3]
+    research["E"]["title"] = temp[4]
+    research["F"]["title"] = temp[5][:-13]
+    research["X1"]["title"] = temp[6].split(pdf)[0]
+    research["X1"]["content"] = temp[6].split(pdf)[1][:-1]
+
+    research["A"]["content"] = text[8].replace("\n", "").split(pdf)[1][:-1]
+    research["B"]["content"] = text[9].replace("\n", "").split(pdf)[1][:-1]
+    research["C"]["content"] = text[10].replace("\n", "").split(pdf)[1][:-1]
+    research["D"]["content"] = text[11].replace("\n", "").split(pdf)[1][:-1]
+    research["E"]["content"] = text[12].replace("\n", "").split(pdf)[1][:-1]
+    research["F"]["content"] = text[13].replace("\n", "").split(pdf)[1][:-1]
 
     return research
+
+def get_planetx_location(text):
+    """Extract planetx location from a PDF and return it as a string."""
+
+    text = int(text.split("-")[1].replace("\nSector", "").strip()) # Don't worry about it :P
+
+    return text
+
+def get_starting_info(text):
+    """Extract starting info from a PDF and return it as a string."""
+
+    text = text.split("sector")
+    temp = []
+    info = {"Spring": [], "Summer": [], "Autumn": [], "Winter": []}
+
+    info["Spring"] = [None] * 12
+    info["Summer"] = [None] * 12
+    info["Autumn"] = [None] * 12
+    info["Winter"] = [None] * 12
+
+    for i in range(1, len(text)):
+        if text[i].startswith("\nn"):
+            temp.append(text[i].strip())
+
+    spring = temp[0].split("\n") + temp[1].split("\n") + temp[2].split("\n")
+    summer = temp[3].split("\n") + temp[4].split("\n") + temp[5].split("\n")
+    autumn = temp[6].split("\n") + temp[7].split("\n") + temp[8].split("\n")
+    winter = temp[9].split("\n") + temp[10].split("\n") + temp[11].split("\n")
+
+    spring = spring[:-6]
+    summer = summer[:-6]
+    autumn = autumn[:-6]
+    winter = winter[:-6]
+
+    for i, x in enumerate(spring):
+        idx = math.floor(i/2)
+        if i % 2 == 0:
+            info["Spring"][idx] = {"sector": spring[i + 1], "content": spring[i]}
+            info["Summer"][idx] = {"sector": summer[i + 1], "content": summer[i]}
+            info["Autumn"][idx] = {"sector": autumn[i + 1], "content": autumn[i]}
+            info["Winter"][idx] = {"sector": winter[i + 1], "content": winter[i]}
+
+    return info
+
 
 
 
@@ -149,7 +213,12 @@ def get_research_from_pdf(pdf_path):
 
 files = "files/"
 
+filecount = len([name for name in os.listdir(files) if os.path.isfile(os.path.join(files, name))])
+filescounted = 0
+
 output = []
+
+starttime = time.time()
 
 try:
 
@@ -158,18 +227,33 @@ try:
         if pdf_path.lower().endswith('.pdf'):
             pdf = pdf_path.replace(".pdf", "").replace(files, "")
 
-            sectors = get_sectors(pdf_path)
-            research = get_research_from_pdf(pdf_path)
+            text = get_text_from_pdf(pdf_path)
 
-            game = {"code": pdf, "sectors": sectors, "research": research}
+            sectors = get_sectors(pdf_path)
+            research = get_research_from_pdf(text)
+            xsector = get_planetx_location(text)
+            info = get_starting_info(text)
+
+            game = {"code": pdf, "sectors": sectors, "planetx": xsector, "research": research, "info": info}
+
             
-            print(f"{pdf}: {research}")
+            # print(f"{pdf}: {sectors}")
+            # print(f"{pdf}: {research}")
+            filescounted += 1
+            print(f"Parsing: {pdf} ", end="")
+            print("▓" * filescounted, end="")
+            print("░" * (filecount - filescounted), end="")
+            print(f" ({filescounted}/{filecount})", end="")
+            print("", end="\r")
 
             output.append(game)
 
 finally:
         # Clean up: Delete the temporary directory and its contents
         shutil.rmtree(temp_dir)
+
+print (" " * 80, end="\r")
+print(f"Successfully Parsed {filecount} files in {round(time.time() - starttime, 2)} seconds")
 
 file = open('output.json', 'w')
 file.write(json.dumps(output, indent=4))
