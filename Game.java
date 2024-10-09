@@ -25,13 +25,13 @@ public class Game {
         int postXLoc;
         int postObj;
         String theoryLocation;
-        String[] research = {"The dwarf planet is not within 2 sectors of a comet.","All the gas clouds are in a band of 4 sectors or less.","At least one asteroid is adjacent to a comet.","The dwarf planet is adjacent to an asteroid.","At least one gas cloud is adjacent to the dwarf planet.","At least one gas cloud is directly opposite an asteroid."};
+        String[] research = {"The dwarf planet is not within 2 sectors of a comet.", "All the gas clouds are in a band of 4 sectors or less.", "At least one asteroid is adjacent to a comet.", "The dwarf planet is adjacent to an asteroid.", "At least one gas cloud is adjacent to the dwarf planet.", "At least one gas cloud is directly opposite an asteroid."};
         int[][] locVal = new int[4][3];
         for (int i = 0; i < 4; i++) {
             locVal[i][1] = i + 1;
             locVal[i][0] = 1;
         }
-        int [] sector = {1, 2, 3, 4, 4, 3, 0, 4, 1, 1, 0, 1};
+        int[] sector = {1, 2, 3, 4, 4, 3, 0, 4, 1, 1, 0, 1};
         //int[] sector = new int[12];
         /*for (int i = 0; i < 12; i++) {
             sector[i] = 4;
@@ -205,8 +205,8 @@ public class Game {
             locVal[i][2] = c;
         }
         for (int i = 0; i < 3; i++) {
-            System.out.println("Final Selection, Theory or X, Player" + locVal[i][1]);
-            if (input.nextLine().toLowerCase() == "theory") {
+            System.out.println("Final Selection, Theory or X, Player " + locVal[i][1]);
+            if (input.nextLine().toLowerCase().equals("theory")) {
                 for (int j = 0; j < 2; j++) {
                     System.out.println("Enter Theory Location");
                     theoryLocation = input.nextLine();
@@ -218,6 +218,7 @@ public class Game {
                     } else {
                         System.out.println("Your Theory is Incorrect");
                     }
+                    input.nextLine();
                 }
             } else {
                 System.out.println("Enter Location of Planet X");
@@ -251,7 +252,7 @@ public class Game {
         for (int i = 0; i < 4; i++) {
             System.out.println("Player " + locVal[i][1] + " Has " + locVal[i][2] + " Points");
         }
-        System.out.print("The Winner is Player " + locVal[0][1]);
+        System.out.println("The Winner is Player " + locVal[0][1]);
     }
 }
 
