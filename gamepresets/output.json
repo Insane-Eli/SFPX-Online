@@ -1,0 +1,1202 @@
+[
+    {
+        "code": "B7F4",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "dwarf",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "gas",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Asteroids",
+            "Asteroids & Comets",
+            "Dwarf Planets & Comets",
+            "Gas Clouds",
+            "Asteroids & Gas Clouds"
+        ]
+    },
+    {
+        "code": "B3K7",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "gas",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Asteroids",
+            "Dwarf Planets & Comets",
+            "Asteroids",
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids & Gas Clouds"
+        ]
+    },
+    {
+        "code": "G3H6",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "gas",
+            "empty",
+            "meteor",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Asteroids",
+            "Gas Clouds",
+            "Asteroids & Dwarf Planets",
+            "Asteroids & Comets"
+        ]
+    },
+    {
+        "code": "E8Y3",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "gas",
+            "empty",
+            "empty",
+            "empty",
+            "gas"
+        ],
+        "research": [
+            "Gas Clouds & Dwarf Planets",
+            "Comets & Asteroids",
+            "Comets & Gas Clouds",
+            "Asteroids",
+            "Dwarf Planets & Comets"
+        ]
+    },
+    {
+        "code": "G7K9",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "dwarf",
+            "gas",
+            "empty",
+            "gas",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds & Asteroids",
+            "Gas Clouds & Dwarf Planets",
+            "Comets",
+            "Comets & Asteroids",
+            "Asteroids & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "E4U9",
+        "sectors": [
+            "gas",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "empty",
+            "gas",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Dwarf Planets & Comets",
+            "Dwarf Planets & Asteroids",
+            "Asteroids & Comets",
+            "Gas Clouds & Comets",
+            "Gas Clouds"
+        ]
+    },
+    {
+        "code": "B3J4",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "empty",
+            "dwarf",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "gas",
+            "asteroid"
+        ],
+        "research": [
+            "Comets",
+            "Gas Clouds",
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids & Gas Clouds",
+            "Asteroids & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "D5T6",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "empty",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "asteroid"
+        ],
+        "research": [
+            "Comets",
+            "Asteroids & Dwarf Planets",
+            "Gas Clouds & Dwarf Planets",
+            "Comets & Gas Clouds",
+            "Asteroids & Gas Clouds"
+        ]
+    },
+    {
+        "code": "B7D8",
+        "sectors": [
+            "empty",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "gas"
+        ],
+        "research": [
+            "Dwarf Planets & Comets",
+            "Asteroids",
+            "Dwarf Planets & Asteroids",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Gas Clouds"
+        ]
+    },
+    {
+        "code": "G7Z5",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "meteor",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "gas",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds & Dwarf Planets",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Comets",
+            "Asteroids",
+            "Gas Clouds & Asteroids"
+        ]
+    },
+    {
+        "code": "C2Z5",
+        "sectors": [
+            "empty",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Asteroids & Comets",
+            "Asteroids",
+            "Comets & Gas Clouds",
+            "Asteroids & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "D5E8",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "dwarf",
+            "gas",
+            "empty",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Dwarf Planets",
+            "Comets & Dwarf Planets",
+            "Gas Clouds & Asteroids",
+            "Gas Clouds & Comets",
+            "Asteroids"
+        ]
+    },
+    {
+        "code": "C2C7",
+        "sectors": [
+            "gas",
+            "dwarf",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "gas",
+            "empty"
+        ],
+        "research": [
+            "Dwarf Planets & Gas Clouds",
+            "Dwarf Planets & Comets",
+            "Asteroids",
+            "Dwarf Planets & Asteroids",
+            "Gas Clouds & Comets"
+        ]
+    },
+    {
+        "code": "E4H6",
+        "sectors": [
+            "empty",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "meteor",
+            "gas"
+        ],
+        "research": [
+            "Asteroids",
+            "Asteroids & Dwarf Planets",
+            "Asteroids & Comets",
+            "Gas Clouds & Dwarf Planets",
+            "Comets & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "J4W9",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "gas",
+            "empty",
+            "dwarf",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "gas",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Comets",
+            "Comets & Dwarf Planets",
+            "Comets",
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "C6W7",
+        "sectors": [
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Asteroids",
+            "Comets",
+            "Gas Clouds",
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids"
+        ]
+    },
+    {
+        "code": "K8J5",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "dwarf",
+            "gas",
+            "empty",
+            "meteor",
+            "empty",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Gas Clouds",
+            "Asteroids & Comets",
+            "Asteroids",
+            "Comets & Gas Clouds",
+            "Asteroids & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "B3W8",
+        "sectors": [
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "gas",
+            "empty",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Asteroids & Comets",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Asteroids",
+            "Gas Clouds"
+        ]
+    },
+    {
+        "code": "B3A5",
+        "sectors": [
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "gas",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Comets",
+            "Gas Clouds",
+            "Asteroids & Comets",
+            "Dwarf Planets & Asteroids",
+            "Gas Clouds & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "E4J9",
+        "sectors": [
+            "dwarf",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "gas",
+            "empty",
+            "empty",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds",
+            "Asteroids & Comets",
+            "Asteroids & Dwarf Planets",
+            "Comets & Dwarf Planets",
+            "Asteroids & Gas Clouds"
+        ]
+    },
+    {
+        "code": "C2B4",
+        "sectors": [
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Asteroids",
+            "Dwarf Planets & Comets",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Gas Clouds",
+            "Asteroids & Comets"
+        ]
+    },
+    {
+        "code": "K5T9",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "meteor",
+            "gas",
+            "empty",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "gas",
+            "dwarf",
+            "asteroid"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Dwarf Planets & Gas Clouds",
+            "Comets & Asteroids",
+            "Asteroids & Dwarf Planets",
+            "Gas Clouds & Comets"
+        ]
+    },
+    {
+        "code": "E8K2",
+        "sectors": [
+            "dwarf",
+            "meteor",
+            "meteor",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "empty",
+            "gas"
+        ],
+        "research": [
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids & Dwarf Planets",
+            "Asteroids",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Comets"
+        ]
+    },
+    {
+        "code": "C2M8",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "gas",
+            "empty",
+            "dwarf",
+            "asteroid"
+        ],
+        "research": [
+            "Asteroids & Comets",
+            "Comets & Gas Clouds",
+            "Asteroids & Gas Clouds",
+            "Dwarf Planets & Comets",
+            "Gas Clouds & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "B3U6",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Asteroids",
+            "Comets & Gas Clouds",
+            "Asteroids & Comets",
+            "Comets & Dwarf Planets",
+            "Gas Clouds & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "D9G9",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "gas",
+            "dwarf",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "gas",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Comets",
+            "Comets & Asteroids",
+            "Comets & Dwarf Planets",
+            "Asteroids & Gas Clouds",
+            "Gas Clouds"
+        ]
+    },
+    {
+        "code": "E8H2",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "meteor",
+            "empty",
+            "empty",
+            "gas",
+            "dwarf",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids",
+            "Asteroids & Comets",
+            "Gas Clouds & Asteroids",
+            "Comets"
+        ]
+    },
+    {
+        "code": "C2Y3",
+        "sectors": [
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Dwarf Planets",
+            "Gas Clouds",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Comets",
+            "Dwarf Planets & Asteroids"
+        ]
+    },
+    {
+        "code": "K5A2",
+        "sectors": [
+            "empty",
+            "meteor",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Asteroids & Dwarf Planets",
+            "Gas Clouds & Comets",
+            "Comets",
+            "Dwarf Planets & Gas Clouds",
+            "Comets & Asteroids"
+        ]
+    },
+    {
+        "code": "C2L6",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Comets",
+            "Gas Clouds & Asteroids",
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids"
+        ]
+    },
+    {
+        "code": "J9H9",
+        "sectors": [
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "meteor",
+            "dwarf",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Asteroids",
+            "Asteroids & Gas Clouds",
+            "Gas Clouds & Comets",
+            "Comets & Asteroids"
+        ]
+    },
+    {
+        "code": "G3X7",
+        "sectors": [
+            "asteroid",
+            "dwarf",
+            "empty",
+            "gas",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Comets",
+            "Gas Clouds & Asteroids",
+            "Gas Clouds & Dwarf Planets",
+            "Dwarf Planets & Asteroids",
+            "Gas Clouds & Comets"
+        ]
+    },
+    {
+        "code": "C6T4",
+        "sectors": [
+            "empty",
+            "gas",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty"
+        ],
+        "research": [
+            "Comets & Asteroids",
+            "Gas Clouds",
+            "Asteroids & Gas Clouds",
+            "Asteroids",
+            "Comets & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "B3B7",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "meteor",
+            "empty",
+            "meteor",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf"
+        ],
+        "research": [
+            "Dwarf Planets & Asteroids",
+            "Comets",
+            "Comets & Gas Clouds",
+            "Asteroids & Comets",
+            "Dwarf Planets & Gas Clouds"
+        ]
+    },
+    {
+        "code": "D5H3",
+        "sectors": [
+            "asteroid",
+            "empty",
+            "meteor",
+            "empty",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "gas",
+            "asteroid"
+        ],
+        "research": [
+            "Asteroids & Gas Clouds",
+            "Comets & Dwarf Planets",
+            "Gas Clouds",
+            "Gas Clouds & Dwarf Planets",
+            "Dwarf Planets & Asteroids"
+        ]
+    },
+    {
+        "code": "D9F4",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "empty",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "empty",
+            "asteroid"
+        ],
+        "research": [
+            "Asteroids & Dwarf Planets",
+            "Dwarf Planets & Comets",
+            "Asteroids",
+            "Dwarf Planets & Gas Clouds",
+            "Gas Clouds & Asteroids"
+        ]
+    },
+    {
+        "code": "B7R8",
+        "sectors": [
+            "empty",
+            "gas",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "dwarf"
+        ],
+        "research": [
+            "Asteroids & Gas Clouds",
+            "Dwarf Planets & Asteroids",
+            "Comets & Asteroids",
+            "Dwarf Planets & Comets",
+            "Comets"
+        ]
+    },
+    {
+        "code": "H6D4",
+        "sectors": [
+            "gas",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "empty"
+        ],
+        "research": [
+            "Asteroids",
+            "Dwarf Planets & Comets",
+            "Asteroids & Dwarf Planets",
+            "Asteroids & Comets",
+            "Dwarf Planets & Gas Clouds"
+        ]
+    },
+    {
+        "code": "H6R9",
+        "sectors": [
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "gas",
+            "empty",
+            "empty",
+            "meteor",
+            "empty",
+            "gas",
+            "asteroid",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Gas Clouds",
+            "Dwarf Planets & Asteroids",
+            "Asteroids & Gas Clouds",
+            "Comets & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "G3K3",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "dwarf",
+            "gas",
+            "empty",
+            "empty",
+            "gas"
+        ],
+        "research": [
+            "Asteroids & Comets",
+            "Gas Clouds & Asteroids",
+            "Asteroids & Dwarf Planets",
+            "Comets",
+            "Dwarf Planets & Gas Clouds"
+        ]
+    },
+    {
+        "code": "D5W4",
+        "sectors": [
+            "empty",
+            "empty",
+            "gas",
+            "dwarf",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "meteor",
+            "gas"
+        ],
+        "research": [
+            "Asteroids",
+            "Dwarf Planets & Gas Clouds",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Comets",
+            "Asteroids & Gas Clouds"
+        ]
+    },
+    {
+        "code": "D9X7",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "empty",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "gas",
+            "dwarf",
+            "empty"
+        ],
+        "research": [
+            "Comets",
+            "Dwarf Planets & Gas Clouds",
+            "Comets & Dwarf Planets",
+            "Asteroids & Dwarf Planets",
+            "Asteroids & Comets"
+        ]
+    },
+    {
+        "code": "J4F9",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "gas",
+            "empty",
+            "gas",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds & Asteroids",
+            "Comets & Gas Clouds",
+            "Dwarf Planets & Asteroids",
+            "Comets & Dwarf Planets",
+            "Gas Clouds & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "H2P3",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "dwarf",
+            "empty",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Dwarf Planets & Comets",
+            "Gas Clouds & Comets",
+            "Comets",
+            "Gas Clouds & Dwarf Planets",
+            "Dwarf Planets & Asteroids"
+        ]
+    },
+    {
+        "code": "C6G7",
+        "sectors": [
+            "dwarf",
+            "meteor",
+            "meteor",
+            "empty",
+            "gas",
+            "gas",
+            "empty",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "asteroid",
+            "asteroid"
+        ],
+        "research": [
+            "Gas Clouds & Asteroids",
+            "Gas Clouds & Dwarf Planets",
+            "Gas Clouds & Comets",
+            "Comets",
+            "Comets & Asteroids"
+        ]
+    },
+    {
+        "code": "E8W4",
+        "sectors": [
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "empty"
+        ],
+        "research": [
+            "Gas Clouds & Asteroids",
+            "Asteroids & Dwarf Planets",
+            "Gas Clouds & Comets",
+            "Dwarf Planets & Comets",
+            "Gas Clouds & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "E4X7",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "empty",
+            "gas",
+            "empty",
+            "gas",
+            "empty",
+            "meteor",
+            "asteroid"
+        ],
+        "research": [
+            "Comets & Asteroids",
+            "Gas Clouds & Dwarf Planets",
+            "Comets",
+            "Gas Clouds & Asteroids",
+            "Asteroids & Dwarf Planets"
+        ]
+    },
+    {
+        "code": "B7Q3",
+        "sectors": [
+            "empty",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "dwarf",
+            "meteor",
+            "gas"
+        ],
+        "research": [
+            "Comets & Dwarf Planets",
+            "Dwarf Planets & Asteroids",
+            "Gas Clouds",
+            "Asteroids & Gas Clouds",
+            "Comets & Asteroids"
+        ]
+    },
+    {
+        "code": "D9U7",
+        "sectors": [
+            "asteroid",
+            "meteor",
+            "dwarf",
+            "asteroid",
+            "asteroid",
+            "empty",
+            "meteor",
+            "gas",
+            "empty",
+            "gas",
+            "empty",
+            "asteroid"
+        ],
+        "research": [
+            "Asteroids & Gas Clouds",
+            "Comets & Dwarf Planets",
+            "Gas Clouds & Comets",
+            "Gas Clouds & Dwarf Planets",
+            "Asteroids & Comets"
+        ]
+    },
+    {
+        "code": "C6J2",
+        "sectors": [
+            "asteroid",
+            "asteroid",
+            "gas",
+            "empty",
+            "asteroid",
+            "asteroid",
+            "meteor",
+            "gas",
+            "empty",
+            "empty",
+            "meteor",
+            "dwarf"
+        ],
+        "research": [
+            "Asteroids",
+            "Dwarf Planets & Gas Clouds",
+            "Comets & Gas Clouds",
+            "Comets & Asteroids",
+            "Asteroids & Gas Clouds"
+        ]
+    }
+]

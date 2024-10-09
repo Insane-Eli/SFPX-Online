@@ -1,3 +1,4 @@
+import json
 import math
 import fitz  # PyMuPDF for PDF image extraction
 import imagehash
@@ -20,6 +21,9 @@ anglemap = {
     135:5,
     165:6
 }
+
+# Create a temporary directory
+temp_dir = tempfile.mkdtemp()
 
 def extract_images_from_pdf(pdf_path, temp_dir):
     """Extract images from a PDF, track their order of appearance, and return only 88x88 images as a list of tuples (image_hash, image_data, image_size)."""
@@ -91,41 +95,81 @@ def compare_images_based_on_order(extracted_images, directory_images):
 
     return output
 
-def analyze_sectors_using_order(pdf_dir_path, reference_dir_path):
+def get_sectors(pdf_path):
     """Process all PDFs in a directory, extract images, and report the contents of each sector based on image matching."""
     results = {}
 
     # Get reference images and their hashes
-    directory_images = get_image_hashes_from_directory(reference_dir_path)
+    directory_images = get_image_hashes_from_directory("references/")
 
-    # Create a temporary directory
-    temp_dir = tempfile.mkdtemp()
+    # Extract only 88x88 images and their order of appearance from the PDF
+    extracted_images = extract_images_from_pdf(pdf_path, temp_dir)
 
-    try:
-        # Loop through each PDF in the directory
-        for pdf in os.listdir(pdf_dir_path):
-            pdf_path = os.path.join(pdf_dir_path, pdf)
-            if pdf_path.lower().endswith('.pdf'):
-                # Extract only 88x88 images and their order of appearance from the PDF
-                extracted_images = extract_images_from_pdf(pdf_path, temp_dir)
-
-                # Compare the extracted images with reference images
-                sector_contents = compare_images_based_on_order(extracted_images, directory_images)
-                results[pdf] = sector_contents
-
-    finally:
-        # Clean up: Delete the temporary directory and its contents
-        shutil.rmtree(temp_dir)
+    # Compare the extracted images with reference images
+    sector_contents = compare_images_based_on_order(extracted_images, directory_images)
+    results = sector_contents
+    # print(f"{pdf_path}: {sector_contents}")
 
     return results
 
-# Usage example
-pdf_dir_path = "files/"  # Directory containing the PDF files
-reference_dir_path = "references/"  # Directory containing reference images
 
-# Analyze all PDFs in the directory
-sector_analysis_results = analyze_sectors_using_order(pdf_dir_path, reference_dir_path)
 
-# Print out the results for each PDF
-for pdf_file, sectors in sector_analysis_results.items():
-    print(f"{pdf_file}: {sectors}")
+
+
+
+
+
+
+
+def get_text_from_pdf(pdf_path):
+    """Extract text from a PDF and return it as a string."""
+    pdf_document = fitz.open(pdf_path)
+    text = ""
+    for page in pdf_document:
+        text += page.get_text()
+    pdf_document.close()
+    return text
+
+def get_research_from_pdf(pdf_path):
+    """Extract research from a PDF and return it as a string."""
+    
+    research = []
+    text = get_text_from_pdf(pdf_path)
+    temp = text.split(":")
+
+    for i in range(1, 6):
+        research.append(temp[i][:-1].replace("\n", "").strip())
+
+    return research
+
+
+
+
+
+
+files = "files/"
+
+output = []
+
+try:
+
+    for pdf in os.listdir(files):
+        pdf_path = os.path.join(files, pdf)
+        if pdf_path.lower().endswith('.pdf'):
+            pdf = pdf_path.replace(".pdf", "").replace(files, "")
+
+            sectors = get_sectors(pdf_path)
+            research = get_research_from_pdf(pdf_path)
+
+            game = {"code": pdf, "sectors": sectors, "research": research}
+            
+            print(f"{pdf}: {research}")
+
+            output.append(game)
+
+finally:
+        # Clean up: Delete the temporary directory and its contents
+        shutil.rmtree(temp_dir)
+
+file = open('output.json', 'w')
+file.write(json.dumps(output, indent=4))
