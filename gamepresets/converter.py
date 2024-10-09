@@ -1,5 +1,6 @@
 import json
 import math
+import time
 import fitz  # PyMuPDF for PDF image extraction
 import imagehash
 from PIL import Image
@@ -212,7 +213,12 @@ def get_starting_info(text):
 
 files = "files/"
 
+filecount = len([name for name in os.listdir(files) if os.path.isfile(os.path.join(files, name))])
+filescounted = 0
+
 output = []
+
+starttime = time.time()
 
 try:
 
@@ -229,16 +235,25 @@ try:
             info = get_starting_info(text)
 
             game = {"code": pdf, "sectors": sectors, "planetx": xsector, "research": research, "info": info}
+
             
             # print(f"{pdf}: {sectors}")
             # print(f"{pdf}: {research}")
-            print(f"Parsing: {pdf}")
+            filescounted += 1
+            print(f"Parsing: {pdf} ", end="")
+            print("▓" * filescounted, end="")
+            print("░" * (filecount - filescounted), end="")
+            print(f" ({filescounted}/{filecount})", end="")
+            print("", end="\r")
 
             output.append(game)
 
 finally:
         # Clean up: Delete the temporary directory and its contents
         shutil.rmtree(temp_dir)
+
+print (" " * 80, end="\r")
+print(f"Successfully Parsed {filecount} files in {round(time.time() - starttime, 2)} seconds")
 
 file = open('output.json', 'w')
 file.write(json.dumps(output, indent=4))
