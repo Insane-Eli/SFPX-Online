@@ -251,7 +251,7 @@
                                                             <h2>Share the code with your friends to play together!</h2>\n\
                                                             <span style='cursor: pointer; font-size: 2rem; user-select: none;' onclick='copyLink();'><img src='./images/copy.svg' style='width: 0.8em; margin-right: 0.3em; filter: invert(1)' />Copy Link</span>\n\
                                                             <br>\n\
-                                                            <label id='ready' style='font-size: 2rem; border: 1px solid white; border-radius: 10px; padding: 0 1vh 0 1vh; cursor: pointer; background-color: rgba(255, 0, 0, 0.5); user-select: none;' onclick='ready(" + name + ");'>Ready</label>\n\
+                                                            <label id='ready' style='font-size: 2rem; border: 1px solid white; border-radius: 10px; padding: 0 1vh 0 1vh; cursor: pointer; background-color: rgba(255, 0, 0, 0.5); user-select: none;' onclick='ready(\"" + name + "\");'>Ready</label>\n\
                                                             <p style='font-size: 2rem; margin-bottom: 0.1rem;'>Players:</p>\n\
                                                             <ul id='playerList'></ul>\n\
                                                             <button id='startBtn' class='startBtn' disabled onclick='backend.send(`{\"player\":\"" + name + "\", \"cmd\":\"start\"}`);'>Start Game</button>";
