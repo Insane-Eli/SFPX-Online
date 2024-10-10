@@ -272,7 +272,21 @@
         }
 
         function copyLink() {
-            navigator.clipboard.writeText(window.location.href.split('?')[0] + "?pin=" + code);
+            var text = window.location.href.split('?')[0] + "?pin=" + code;
+            // navigator.clipboard.writeText(window.location.href.split('?')[0] + "?pin=" + code);
+
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Unable to copy to clipboard', err);
+            }
+            document.body.removeChild(textArea);
+
         }
 
         function startGame(code) {
