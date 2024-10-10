@@ -25,12 +25,12 @@ export default class PlanetXGame {
         this.gamedata = gamepresets[randomInt(0, gamepresets.length - 1)];
         // console.log(this.gamedata);
 
-        this.addPlayer("Player1", 1);
-        this.addPlayer("Player2", 1);
-        this.addPlayer("Player3", 1);
-        this.addPlayer("Player4", 1);
+        // this.addPlayer("Player1", 1);
+        // this.addPlayer("Player2", 1);
+        // this.addPlayer("Player3", 1);
+        // this.addPlayer("Player4", 1);
 
-        this.start();
+        // this.start();
     }
 
     addPlayer(name, difficulty) {

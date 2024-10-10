@@ -32,7 +32,8 @@
 
             var visible = 1;
             var sector = 0;
-            var selected = 0;
+            var selectstart = 0;
+            var selectend = 0;
 
             var blue = "rgb(80, 183, 249)";
             var darkblue = "rgb(20, 20, 80)";
@@ -170,9 +171,15 @@
 
                 if (sector > 0) {
 
-                    if (selected > 0) {
-                        var start = selected > sector ? sector : selected;
-                        var end = selected > sector ? selected : sector;
+                    if (selectstart > 0 && selectend == 0) {
+                        var start = selectstart > sector ? sector : selectstart;
+                        var end = selectstart > sector ? selectstart : sector;
+                    } else if (selectend > 0 && selectstart == 0) {
+                        var start = selectend > sector ? sector : selectend;
+                        var end = selectend > sector ? selectend : sector;
+                    } else if (selectstart > 0 && selectend > 0) {
+                        var start = selectend > selectstart ? selectstart : selectend;
+                        var end = selectend > selectstart ? selectend : selectstart;
                     } else {
                         var start = sector;
                         var end = sector;
@@ -256,10 +263,14 @@
             canvas.onclick = () => {
 
                 if (sector > 0) {
-                    selected = sector;
+                    if (selectstart > 0) {
+                        selectend = sector;
+                    } else {
+                        selectstart = sector;
+                    }
                 }
 
-                visible++;
+                // visible++;
                 drawBoard();
             };
 
@@ -275,11 +286,20 @@
                 var angle = Math.atan2(y - hh, x - hw) + Math.PI;
                 sector = (Math.floor(((angle / (Math.PI * 2)) * 12)) + 9) % 12 + 1;
 
-                if (c > hh * 0.86)
+                if (c > hh * 0.86 && selectend == 0)
                     sector = 0;
 
                 drawBoard();
 
+            }
+
+            window.onkeydown = (event) => {
+                if (event.key == "Escape") {
+                    selectstart = 0;
+                    selectend = 0;
+                    sector = 0;
+                    drawBoard();
+                }
             }
 
 
