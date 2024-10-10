@@ -232,4 +232,6 @@ for (const name of Object.keys(nets)) {
 
 console.log(results);
 
+new PlanetXGame(4001)
+
 // console.log("Waiting for game to be created...");
