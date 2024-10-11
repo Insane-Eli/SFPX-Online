@@ -20,8 +20,8 @@
     <div class="options-tab" id="devTab"> <!-- options tab doesnt do anythign rn -->
         <button class="closeBtn" onclick="closeDev()"> &times; </button>
 
-        <button onclick="startGame()">Start Test Game</button>
-        <button onclick="backend.reboot()">Reboot Server</button>
+        <button onclick="startGame(); closeDev();">Start Test Game</button>
+        <button onclick="backend.reboot(); closeDev();">Reboot Server</button>
     </div>
 
     <div id="content"
