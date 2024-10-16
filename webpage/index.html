@@ -14,8 +14,12 @@
     <script src="backend.js"></script>
 
     <audio id="music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <source src="audio/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="click">
+        <!-- <source src="audio/scif-fi-click.wav" type="audio/wav"> -->
+        <source src="audio/click.wav" type="audio/wav">
     </audio>
 </head>
 
@@ -147,6 +151,7 @@
 
         document.addEventListener('click', function () {
             document.getElementById('music').play();
+            document.getElementById('click').play();
         });
 
         // const ip = document.getElementById("ip");
