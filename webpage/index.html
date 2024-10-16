@@ -12,6 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="backend.js"></script>
+
+    <audio id="music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </head>
 
 <body>
@@ -36,7 +41,7 @@
             <input id="name" class="startBtn" pattern="[0-9a-zA-Z]{3,20}" required />
             <br> -->
             <label for="pin" style="font-size: 2rem;">Game Pin:</label>
-            <input id="pin" class="startBtn" pattern="[0-9]{4}" required />
+            <input id="pin" class="startBtn" pattern="[0-9]{4}" required onload="pin.focus(); pin.select();" />
             <br>
             <input type="submit" class="startBtn" id="join" style="user-select: text;" value="Join Game" />
             <!-- <br> -->
@@ -139,6 +144,10 @@
             // For Safari
             return 'Sure?';
         };
+
+        document.addEventListener('click', function () {
+            document.getElementById('music').play();
+        });
 
         // const ip = document.getElementById("ip");
         const pin = document.getElementById("pin");
